@@ -1,0 +1,24 @@
+{
+  "name": "ssw-555-project",
+  "version": "1.0.0",
+  "description": "Course project for SSW 555",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GraceMattern/SSW-555-Project.git"
+  },
+  "author": "SCRUMptious",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GraceMattern/SSW-555-Project/issues"
+  },
+  "homepage": "https://github.com/GraceMattern/SSW-555-Project#readme",
+  "dependencies": {
+    "connect": "^3.7.0",
+    "express": "^4.17.3",
+    "http": "0.0.1-security"
+  }
+}
