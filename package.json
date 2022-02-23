@@ -4,7 +4,8 @@
   "description": "Course project for SSW 555",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "dependencies": {
     "connect": "^3.7.0",
     "express": "^4.17.3",
-    "http": "0.0.1-security"
+    "http": "0.0.1-security",
+    "jest": "^27.5.1"
   }
 }
