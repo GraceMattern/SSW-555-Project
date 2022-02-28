@@ -18,7 +18,8 @@
   btn.addEventListener("click", () =>{
       btn.hidden = true;
       const overworld = new Overworld({
-        element: document.querySelector(".game-container")
+        element: document.querySelector(".game-container"),
+        playerName: prompt("Enter the name of the player."),
       });
       overworld.init();
   });
