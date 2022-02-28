@@ -1,21 +1,9 @@
-const express = require("express");
-// const connect = require("connect");
-const app = express();
+var express = require("express");
+var connect = require("connect");
+var http = require("http");
 
-// const http = require("http");
+var path = "";
+var app = connect().use(express.static(__dirname + path));
 
-const path = __dirname + "/index.html";
-
-app.use("/", async (req, res) => {
-  try {
-    res.sendFile(path);
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-app.listen(8080, () => {
-  console.log("Server will be running on http://localhost:8080");
-});
-// http.createServer(app).listen(8080);
-// console.log("Server will be running on http://localhost:8080");
+http.createServer(app).listen(8080);
+console.log("Server will be running on http://localhost:8080");
