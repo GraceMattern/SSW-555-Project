@@ -18,13 +18,21 @@
     </div>
 
     <div class="game-container">
-      <canvas class="game-canvas" width="352px" height="198px"></canvas>
+      <canvas id="gc" class="game-canvas" width="352px" height="198px"></canvas>
+      <button id="btn" class="start-btn"></button>
     </div>
+    <!-- Enable Autoplay on browser -->
+    <audio controls loop autoplay>
+      <source src="./assets/music/relax1.mp3" type="audio/mpeg">
+    </audio>
+    
 
     <!-- Scripts -->
-    <script src="/Overworld.js"></script>
+    <script src="/utils.js"></script>
+    <script src="/DirectionInput.js"></script>
     <script src="/GameObject.js"></script>
     <script src="/Sprite.js"></script>
+    <script src="/Overworld.js"></script>
     <script src="/init.js"></script>
   </body>
 </html>
