@@ -22,8 +22,8 @@ class Sprite {
   }
 
   draw(ctx) {
-    const x = this.gameObject.x * 16;
-    const y = this.gameObject.y * 16;
+    const x = this.gameObject.x;
+    const y = this.gameObject.y;
 
     this.isLoaded && ctx.drawImage(this.image,
       0, // left cut (col)
