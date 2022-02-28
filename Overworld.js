@@ -32,4 +32,6 @@ class Overworld {
       npc1.sprite.draw(this.ctx);
     }, 200);
   }
+
+  startGameLoop() {}
 }
