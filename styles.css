@@ -1,24 +1,37 @@
 * {
-    box-sizing:border-box;
+  box-sizing: border-box;
 }
 
 body {
-    background: #333;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
+  background: #333;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
 }
 
 .game-container {
-    position: relative; 
-    width: 352px;
-    height: 198px;
-    margin: 0 auto;
-    outline: 1px solid #fff;
+  position: relative;
+  width: 352px;
+  height: 198px;
+  margin: 0 auto;
+  outline: 1px solid #fff;
 
-    transform: scale(3) translateY(50%);
+  transform: scale(3) translateY(50%);
 }
 
 .game-container canvas {
-    image-rendering: pixelated;
+  image-rendering: pixelated;
+}
+
+/* CSS styles for selectors */
+.levelContainer {
+  position: absolute;
+  top: 40px;
+  left: 250px;
+  color: #fff;
+}
+
+#levels {
+  width: 100px;
+  text-align: center;
 }

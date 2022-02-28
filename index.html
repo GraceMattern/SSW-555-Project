@@ -5,7 +5,18 @@
     <link href="/styles.css" type="text/css" rel="stylesheet" />
   </head>
   <body>
-    <div class="quitButton"></div>
+    <!-- Difficulty level selector
+    levelContainer will only appear on the start screen
+    -->
+    <div class="levelContainer">
+      <label for="levels">Difficulty</label>
+      <select name="levels" id="levels">
+        <option value="easy" selected>Easy</option>
+        <option value="medium" selected>Medium</option>
+        <option value="hard" selected>Hard</option>
+      </select>
+    </div>
+
     <div class="game-container">
       <canvas class="game-canvas" width="352px" height="198px"></canvas>
     </div>
