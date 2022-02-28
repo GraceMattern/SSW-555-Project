@@ -21,6 +21,7 @@ body {
 
 .game-container canvas {
   image-rendering: pixelated;
+  position: absolute;
 }
 
 /* CSS styles for selectors */
@@ -34,4 +35,20 @@ body {
 #levels {
   width: 100px;
   text-align: center;
+}
+
+.start-btn {
+    transform:translateY(-50%);
+    left:20%;
+    right:20%;
+    top: 75%;
+    line-height: 30px;
+    font-weight: bold;
+    padding: 0 40px;
+    background: salmon;
+    border: none;
+    position: absolute;
+}
+.start-btn:hover {
+    background: lightsalmon;
 }
