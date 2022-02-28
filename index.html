@@ -2,18 +2,37 @@
 <html>
   <head>
     <title>The Giving Garden</title>
-    <link href="/styles.css" type="text/css" rel="stylesheet">
+    <link href="/styles.css" type="text/css" rel="stylesheet" />
   </head>
   <body>
-    <div class="game-container">
-      <canvas class="game-canvas" width="352px" height="198px"></canvas>
+    <!-- Difficulty level selector
+    levelContainer will only appear on the start screen
+    -->
+    <div class="levelContainer">
+      <label for="levels">Difficulty</label>
+      <select name="levels" id="levels">
+        <option value="easy" selected>Easy</option>
+        <option value="medium" selected>Medium</option>
+        <option value="hard" selected>Hard</option>
+      </select>
     </div>
 
+    <div class="game-container">
+      <canvas id="gc" class="game-canvas" width="352px" height="198px"></canvas>
+      <button id="btn" class="start-btn"></button>
+    </div>
+    <!-- Enable Autoplay on browser -->
+    <audio controls loop autoplay>
+      <source src="./assets/music/relax1.mp3" type="audio/mpeg">
+    </audio>
+    
+
     <!-- Scripts -->
-    <script src="/Overworld.js"></script>
+    <script src="/utils.js"></script>
+    <script src="/DirectionInput.js"></script>
     <script src="/GameObject.js"></script>
     <script src="/Sprite.js"></script>
+    <script src="/Overworld.js"></script>
     <script src="/init.js"></script>
-
   </body>
 </html>

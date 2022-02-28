@@ -1,5 +1,5 @@
 const utils = {
-  withGrid(number) {
-    return number * 16;
-  },
-};
+    withGrid(n) {
+      return n * 16;
+    }
+  }
