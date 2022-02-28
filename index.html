@@ -2,9 +2,19 @@
 <html>
   <head>
     <title>The Giving Garden</title>
-    <link href="/styles.css" type="text/css" rel="stylesheet">
+    <link href="/styles.css" type="text/css" rel="stylesheet" />
   </head>
   <body>
+    <!-- Difficulty level selector
+    levelContainer will only appear on the start screen
+    -->
+    <div class="levelContainer">
+      <label for="levels">Difficulty</label>
+      <select name="levels" id="levels">
+        <option value="easy" selected>Easy</option>
+      </select>
+    </div>
+
     <div class="game-container">
       <canvas class="game-canvas" width="352px" height="198px"></canvas>
     </div>
@@ -14,6 +24,5 @@
     <script src="/GameObject.js"></script>
     <script src="/Sprite.js"></script>
     <script src="/init.js"></script>
-
   </body>
 </html>
