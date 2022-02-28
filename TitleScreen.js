@@ -25,17 +25,17 @@ class TitleScreen {
   }
 
   close() {
-    this.keyboardMenu.end();
-    this.element.remove();
+    // this.keyboardMenu.end();
+    // this.element.remove();
   }
   
   init(container) {
     return new Promise(resolve => {
       this.createElement();
       container.appendChild(this.element);
-      this.keyboardMenu = new KeyboardMenu();
-      this.keyboardMenu.init(this.element);
-      this.keyboardMenu.setOptions(this.getOptions(resolve))
+      // this.keyboardMenu = new KeyboardMenu();
+      // this.keyboardMenu.init(this.element);
+      // this.keyboardMenu.setOptions(this.getOptions(resolve))
     })
   }
 
