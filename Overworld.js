@@ -10,12 +10,12 @@ class OverworldMap {
   }
 
   drawLowerImage(ctx) {
-    ctx.drawImage(this.lowerImage, 0, 0)
+    ctx.drawImage(this.lowerImage, 0, 0);
   }
 
   drawUpperImage(ctx) {
-    ctx.drawImage(this.upperImage, 0, 0)
-  } 
+    ctx.drawImage(this.upperImage, 0, 0);
+  }
 }
 
 window.OverworldMaps = {
@@ -31,11 +31,11 @@ window.OverworldMaps = {
       npc1: new GameObject({
         x: utils.withGrid(0),
         y: utils.withGrid(0),
-        src: "/assets/images/characters/sprite02.png"
-      })
-    }
-  }
-}
+        src: "/assets/images/characters/sprite02.png",
+      }),
+    },
+  },
+};
 
 // ===================================================
 
@@ -53,15 +53,15 @@ class Overworld {
   startGameLoop() {
     const step = () => {
       // clear per frame
-      this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
       // lower
       this.map.drawLowerImage(this.ctx);
 
       // objs
-      Object.values(this.map.gameObjects).forEach(object => {
+      Object.values(this.map.gameObjects).forEach((object) => {
         object.update({
-          arrow: this.directionInput.direction
+          arrow: this.directionInput.direction,
         });
         object.sprite.draw(this.ctx);
       });
@@ -83,6 +83,4 @@ class Overworld {
 
     this.startGameLoop();
   }
-
-  startGameLoop() {}
 }
