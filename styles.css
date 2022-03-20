@@ -27,28 +27,28 @@ body {
 /* CSS styles for selectors */
 .levelContainer {
   position: absolute;
-  top: 40px;
-  left: 250px;
-  color: #fff;
+  top: 66%;
+  left: 35%;
 }
 
 #levels {
   width: 100px;
   text-align: center;
+  background-color: salmon;
 }
 
 .start-btn {
-    transform:translateY(-50%);
-    left:20%;
-    right:20%;
-    top: 75%;
-    line-height: 30px;
-    font-weight: bold;
-    padding: 0 40px;
-    background: salmon;
-    border: none;
-    position: absolute;
+  transform: translateY(-50%);
+  left: 20%;
+  right: 20%;
+  top: 85%;
+  line-height: 30px;
+  font-weight: bold;
+  padding: 0 40px;
+  background: salmon;
+  border: none;
+  position: absolute;
 }
 .start-btn:hover {
-    background: lightsalmon;
+  background: lightsalmon;
 }

@@ -8,24 +8,23 @@
     <!-- Difficulty level selector
     levelContainer will only appear on the start screen
     -->
-    <div class="levelContainer">
-      <label for="levels">Difficulty</label>
-      <select name="levels" id="levels">
-        <option value="easy" selected>Easy</option>
-        <option value="medium" selected>Medium</option>
-        <option value="hard" selected>Hard</option>
-      </select>
-    </div>
 
     <div class="game-container">
       <canvas id="gc" class="game-canvas" width="352px" height="198px"></canvas>
+      <div class="levelContainer" id="levelContainer">
+        <!-- <label for="levels">Difficulty</label> -->
+        <select name="levels" id="levels">
+          <option value="easy" selected>Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard" selected>Hard</option>
+        </select>
+      </div>
       <button id="btn" class="start-btn"></button>
     </div>
     <!-- Enable Autoplay on browser -->
     <audio controls loop autoplay>
-      <source src="./assets/music/relax1.mp3" type="audio/mpeg">
+      <source src="./assets/music/relax1.mp3" type="audio/mpeg" />
     </audio>
-    
 
     <!-- Scripts -->
     <script src="/utils.js"></script>
