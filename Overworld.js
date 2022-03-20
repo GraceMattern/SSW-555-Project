@@ -9,13 +9,21 @@ class OverworldMap {
     this.upperImage.src = config.upperSrc;
   }
 
-  drawLowerImage(ctx) {
-    ctx.drawImage(this.lowerImage, 0, 0);
+  drawLowerImage(ctx, cameraPerson) {
+    ctx.drawImage(
+      this.lowerImage, 
+      utils.withGrid(10.5) - cameraPerson.x, 
+      utils.withGrid(6) - cameraPerson.y
+      )
   }
 
-  drawUpperImage(ctx) {
-    ctx.drawImage(this.upperImage, 0, 0);
-  }
+  drawUpperImage(ctx, cameraPerson) {
+    ctx.drawImage(
+      this.upperImage, 
+      utils.withGrid(10.5) - cameraPerson.x, 
+      utils.withGrid(6) - cameraPerson.y
+    )
+  } 
 }
 
 window.OverworldMaps = {
@@ -23,15 +31,15 @@ window.OverworldMaps = {
     lowerSrc: "assets/images/maps/map_3.png",
     // upperSrc: "", // TODO
     gameObjects: {
-      protag: new Person({
-        isPlayerControlled: true,
-        x: utils.withGrid(5),
-        y: utils.withGrid(6),
-      }),
       npc1: new GameObject({
         x: utils.withGrid(0),
         y: utils.withGrid(0),
         src: "/assets/images/characters/sprite02.png",
+      }),
+      protag: new Person({
+        isPlayerControlled: true,
+        x: utils.withGrid(5),
+        y: utils.withGrid(6),
       }),
     },
   },
@@ -55,19 +63,27 @@ class Overworld {
       // clear per frame
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-      // lower
-      this.map.drawLowerImage(this.ctx);
+      //Establish the camera person
+      const cameraPerson = this.map.gameObjects.protag;
 
-      // objs
-      Object.values(this.map.gameObjects).forEach((object) => {
+      //Update all objects
+      Object.values(this.map.gameObjects).forEach(object => {
         object.update({
           arrow: this.directionInput.direction,
-        });
-        object.sprite.draw(this.ctx);
-      });
+          map: this.map,
+        })
+      })
+
+      // draw lower
+      this.map.drawLowerImage(this.ctx, cameraPerson);
+
+      //Draw Game Objects
+      Object.values(this.map.gameObjects).forEach(object => {
+        object.sprite.draw(this.ctx, cameraPerson);
+      })
 
       // TODO upper
-      // this.map.drawUpperImage(this.ctx);
+      // this.map.drawUpperImage(this.ctx, cameraPerson);
 
       requestAnimationFrame(() => {
         step();
