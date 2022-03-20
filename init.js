@@ -32,4 +32,11 @@
     alert("Quit successfully- initial");
   };
   document.body.appendChild(quitButton);
+
+  const restartButton = document.createElement("button");
+  restartButton.innerHTML = "Restart";
+  restartButton.onclick = () => {
+    overworld.init();
+  };
+  document.body.appendChild(restartButton);
 })();
