@@ -1,6 +1,7 @@
 class OverworldMap {
   constructor(config) {
     this.gameObjects = config.gameObjects;
+    this.walls = config.walls || {};
 
     this.lowerImage = new Image();
     this.lowerImage.src = config.lowerSrc;
@@ -28,24 +29,34 @@ class OverworldMap {
     );
   }
 
-  async startCutscene(events) {
-    this.isCutscenePlaying = true;
+  isSpaceTaken(currentX, currentY, direction) {
+    const { x, y } = utils.nextPosition(currentX, currentY, direction);
+    return this.walls[`${x},${y}`] || false;
+  }
 
-    for (let i = 0; i < events.length; i++) {
-      const eventHandler = new OverworldEvent({
-        event: events[i],
-        map: this,
-      });
-      await eventHandler.init();
-    }
+  mountObjects() {
+    Object.values(this.gameObjects).forEach((o) => {
+      //TODO: determine if this object should actually mount
+      o.mount(this);
+    });
+  }
 
-    this.isCutscenePlaying = false;
+  addWall(x, y) {
+    this.walls[`${x},${y}`] = true;
+  }
+  removeWall(x, y) {
+    delete this.walls[`${x},${y}`];
+  }
+  moveWall(wasX, wasY, direction) {
+    this.removeWall(wasX, wasY);
+    const { x, y } = utils.nextPosition(wasX, wasY, direction);
+    this.addWall(x, y);
   }
 }
 
 window.OverworldMaps = {
   DemoRoom: {
-    lowerSrc: "assets/images/maps/map_3.png",
+    lowerSrc: "assets/images/maps/demo.png",
     // upperSrc: "", // TODO
     gameObjects: {
       npc1: new GameObject({
@@ -59,6 +70,14 @@ window.OverworldMaps = {
         y: utils.withGrid(6),
       }),
     },
+  },
+  walls: {
+    [utils.asGridCoord(0, 0)]: true,
+    [utils.asGridCoord(0, 1)]: true,
+    [utils.asGridCoord(0, 2)]: true,
+    [utils.asGridCoord(0, 3)]: true,
+    [utils.asGridCoord(0, 4)]: true,
+    [utils.asGridCoord(0, 5)]: true,
   },
 };
 class Overworld {
@@ -116,8 +135,7 @@ class Overworld {
 
   init() {
     this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
-
-    this.bindActionInput();
+    this.map.mountObjects();
 
     this.directionInput = new DirectionInput();
     this.directionInput.init();

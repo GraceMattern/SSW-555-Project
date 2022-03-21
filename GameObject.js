@@ -1,5 +1,6 @@
 class GameObject {
   constructor(config) {
+    this.isMounted = false;
     this.x = config.x || 0;
     this.y = config.y || 0;
     this.direction = config.direction || "down";
@@ -7,6 +8,12 @@ class GameObject {
       gameObject: this,
       src: config.src || "assets/images/characters/sprite01.png",
     });
+  }
+
+  mount(map) {
+    console.log("mounting!");
+    this.isMounted = true;
+    map.addWall(this.x, this.y);
   }
 
   update() {}
@@ -28,15 +35,35 @@ class Person extends GameObject {
   }
 
   update(state) {
-    this.updatePosition();
-    this.updateSprite(state);
+    if (this.movingProgressRemaining > 0) {
+      this.updatePosition();
+    } else {
+      if (
+        this.isPlayerControlled &&
+        this.movingProgressRemaining === 0 &&
+        state.arrow
+      ) {
+        this.startBehavior(state, {
+          type: "walk",
+          direction: state.arrow,
+        });
+      }
+      this.updateSprite(state);
+    }
+  }
 
-    if (
-      this.isPlayerControlled &&
-      this.movingProgressRemaining === 0 &&
-      state.arrow
-    ) {
-      this.direction = state.arrow;
+  startBehavior(state, behavior) {
+    //Set character direction to whatever behavior has
+    this.direction = behavior.direction;
+
+    if (behavior.type === "walk") {
+      //Stop here if space is not free
+      if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
+        return;
+      }
+
+      //Ready to walk!
+      state.map.moveWall(this.x, this.y, this.direction);
       this.movingProgressRemaining = 16;
     }
   }
