@@ -24,27 +24,28 @@ class PickApple extends GameObject {
       src: "/assets/images/food/Apple.png",
       animations: {
         "used-down"   : [ [0,0] ],
-        "unused-down" : [ [1,0] ],
+        //"unused-down" : [ [1,0] ],
       },
       currentAnimation: "used-down"  
     });
     this.storyFlag = config.storyFlag;
+    this.fruits=config.fruits
 
-    // this.talking = [
-    //   {
-    //     required: [this.storyFlag],
-    //     events: [
-    //       { type: "textMessage", text: "You have already used this." },
-    //     ]
-    //   },
-    //   {
-    //     events: [
-    //       { type: "textMessage", text: "Approaching the legendary pizza stone..." },
-    //       // { type: "craftingMenu", pizzas: this.pizzas },
-    //       { type: "addStoryFlag", flag: this.storyFlag },
-    //     ]
-    //   }
-    // ]
+     this.talking = [
+       {
+         required: [this.storyFlag],
+         events: [
+           { type: "textMessage", text: "You have already used this." },
+         ]
+       },
+       {
+         events: [
+           { type: "textMessage", text: "Approaching an apple..." },
+           { type: "craftingMenu", pizzas: this.fruits },
+           { type: "addStoryFlag", flag: this.storyFlag },
+         ]
+       }
+     ]
     
   }
   // update() {
@@ -63,11 +64,12 @@ class PickStrawberry extends GameObject {
       src: "/assets/images/food/Strawberry.png",
       animations: {
         "used-down"   : [ [0,0] ],
-        "unused-down" : [ [1,0] ],
+       // "unused-down" : [ [1,0] ],
       },
       currentAnimation: "used-down"  
     });
     this.storyFlag = config.storyFlag;
+    this.fruits=config.fruits
 
      this.talking = [
        {
@@ -78,7 +80,7 @@ class PickStrawberry extends GameObject {
        },
        {
          events: [
-           { type: "textMessage", text: "Approaching the legendary pizza stone..." },
+           { type: "textMessage", text: "Approaching a Strawberry..." },
            { type: "craftingMenu", fruits: this.fruits },
            { type: "addStoryFlag", flag: this.storyFlag },
          ]

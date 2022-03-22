@@ -61,12 +61,12 @@ window.OverworldMaps = {
       pickapple: new PickApple({
         x: utils.withGrid(10),
         y: utils.withGrid(15),
-        storyFlag: "Item-picked"
+        storyFlag: "Apple_picked"
       }),
       pickleek: new PickStrawberry({
         x: utils.withGrid(20),
         y: utils.withGrid(10),
-        storyFlag: "Item-picked"
+        storyFlag: "Strawberry_picked"
       }),
     },
   },
