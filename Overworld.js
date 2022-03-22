@@ -36,6 +36,10 @@ window.OverworldMaps = {
         y: utils.withGrid(0),
         src: "/assets/images/characters/sprite02.png",
       }),
+      pickitem: new PickApple({
+        x: utils.withGrid(6),
+        y: utils.withGrid(10),
+      }),
       protag: new Person({
         isPlayerControlled: true,
         x: utils.withGrid(5),
