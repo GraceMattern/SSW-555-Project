@@ -52,8 +52,7 @@ class GameObject {
     this.doBehaviorEvent(map);
   }
 }
-
-<<<<<<< HEAD
+//This is the class for the user to pick an apple
 class PickApple extends GameObject {
   
   constructor(config) {
@@ -88,12 +87,14 @@ class PickApple extends GameObject {
      ]
     
   }
-  // update() {
-  //   this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
-  //   ? "used-down"
-  //   : "unused-down";
-  // }
+  update() {
+     this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
+     ? "used-down"
+     : "unused-down";
+   }
 }
+//This is the class for the user to pick a srawberry
+
 class PickStrawberry extends GameObject {
   
   constructor(config) {
@@ -128,16 +129,14 @@ class PickStrawberry extends GameObject {
      ]
     
   }
-  //  update() {
-  //    this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
-  //    ? "used-down"
-  //    : "unused-down";
-  //  }
+    update() {
+      this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
+      ? "used-down"
+      : "unused-down";
+    }
 }
-=======
-// =======================================
 
->>>>>>> c50e5b084c8907271dc523620963bde9f4c6eec3
+// =======================================
 class Person extends GameObject {
   constructor(config) {
     super(config);
