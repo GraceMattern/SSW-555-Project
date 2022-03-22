@@ -11,15 +11,25 @@ class OverworldMap {
     this.upperImage.src = config.upperSrc;
 
     this.isCutscenePlaying = false;
+    this.isPaused = false;
   }
 
-  drawLowerImage(ctx) {
-    ctx.drawImage(this.lowerImage, 0, 0);
+  drawLowerImage(ctx, cameraPerson) {
+    ctx.drawImage(
+      this.lowerImage,
+      utils.withGrid(10.5) - cameraPerson.x,
+      utils.withGrid(6) - cameraPerson.y
+    );
   }
 
-  drawUpperImage(ctx) {
-    ctx.drawImage(this.upperImage, 0, 0);
+  drawUpperImage(ctx, cameraPerson) {
+    ctx.drawImage(
+      this.upperImage,
+      utils.withGrid(10.5) - cameraPerson.x,
+      utils.withGrid(6) - cameraPerson.y
+    );
   }
+
   mountObjects() {
     Object.keys(this.gameObjects).forEach((key) => {
       //TODO: determine if this object should actually mount
@@ -145,19 +155,27 @@ class Overworld {
       // clear per frame
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-      // lower
-      this.map.drawLowerImage(this.ctx);
+      //Establish the camera person
+      const cameraPerson = this.map.gameObjects.protag;
 
-      // objs
+      //Update all objects
       Object.values(this.map.gameObjects).forEach((object) => {
         object.update({
           arrow: this.directionInput.direction,
+          map: this.map,
         });
-        object.sprite.draw(this.ctx);
+      });
+
+      // draw lower
+      this.map.drawLowerImage(this.ctx, cameraPerson);
+
+      //Draw Game Objects
+      Object.values(this.map.gameObjects).forEach((object) => {
+        object.sprite.draw(this.ctx, cameraPerson);
       });
 
       // TODO upper
-      // this.map.drawUpperImage(this.ctx);
+      // this.map.drawUpperImage(this.ctx, cameraPerson);
 
       requestAnimationFrame(() => {
         step();
@@ -170,6 +188,12 @@ class Overworld {
     new KeyPressListener("Enter", () => {
       //Is there a person here to talk to?
       this.map.checkForActionCutscene();
+    });
+
+    new KeyPressListener("Escape", () => {
+      if (!this.map.isCutscenePlaying) {
+        this.map.startCutscene([{ type: "pause" }]);
+      }
     });
   }
 

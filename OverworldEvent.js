@@ -4,6 +4,17 @@ class OverworldEvent {
     this.event = event;
   }
 
+  pause(resolve) {
+    this.map.isPaused = true;
+    const menu = new PauseMenu({
+      onComplete: () => {
+        resolve();
+        this.map.isPaused = false;
+      },
+    });
+    menu.init(document.querySelector(".game-container"));
+  }
+
   stand(resolve) {
     const who = this.map.gameObjects[this.event.who];
     who.startBehavior(
