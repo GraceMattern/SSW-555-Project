@@ -11,25 +11,15 @@ class OverworldMap {
     this.upperImage.src = config.upperSrc;
 
     this.isCutscenePlaying = false;
-    this.isPaused = false;
   }
 
-  drawLowerImage(ctx, cameraPerson) {
-    ctx.drawImage(
-      this.lowerImage,
-      utils.withGrid(10.5) - cameraPerson.x,
-      utils.withGrid(6) - cameraPerson.y
-    );
+  drawLowerImage(ctx) {
+    ctx.drawImage(this.lowerImage, 0, 0);
   }
 
-  drawUpperImage(ctx, cameraPerson) {
-    ctx.drawImage(
-      this.upperImage,
-      utils.withGrid(10.5) - cameraPerson.x,
-      utils.withGrid(6) - cameraPerson.y
-    );
+  drawUpperImage(ctx) {
+    ctx.drawImage(this.upperImage, 0, 0);
   }
-
   mountObjects() {
     Object.keys(this.gameObjects).forEach((key) => {
       //TODO: determine if this object should actually mount
@@ -136,7 +126,8 @@ window.OverworldMaps = {
   },
 };
 
-// ===================================================
+// =====================================================
+
 
 class Overworld {
   constructor(config) {
@@ -154,27 +145,19 @@ class Overworld {
       // clear per frame
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-      //Establish the camera person
-      const cameraPerson = this.map.gameObjects.protag;
+      // lower
+      this.map.drawLowerImage(this.ctx);
 
-      //Update all objects
+      // objs
       Object.values(this.map.gameObjects).forEach((object) => {
         object.update({
           arrow: this.directionInput.direction,
-          map: this.map,
         });
-      });
-
-      // draw lower
-      this.map.drawLowerImage(this.ctx, cameraPerson);
-
-      //Draw Game Objects
-      Object.values(this.map.gameObjects).forEach((object) => {
-        object.sprite.draw(this.ctx, cameraPerson);
+        object.sprite.draw(this.ctx);
       });
 
       // TODO upper
-      // this.map.drawUpperImage(this.ctx, cameraPerson);
+      // this.map.drawUpperImage(this.ctx);
 
       requestAnimationFrame(() => {
         step();
@@ -187,12 +170,6 @@ class Overworld {
     new KeyPressListener("Enter", () => {
       //Is there a person here to talk to?
       this.map.checkForActionCutscene();
-    });
-    
-    new KeyPressListener("Escape", () => {
-      if (!this.map.isCutscenePlaying) {
-        this.map.startCutscene([{ type: "pause" }]);
-      }
     });
   }
 
