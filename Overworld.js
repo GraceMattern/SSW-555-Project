@@ -223,7 +223,7 @@ class Overworld {
       // { who: "npc1", type: "walk", direction: "down", time: 800 },
       {
         type: "textMessage",
-        text: "Welcome to The Giving Garden! Press Enter to see more",
+        text: "Welcome to The Giving Garden! Press next.",
       },
 
       { type: "textMessage", text: "Start moving by pressing Arrow keys" },
