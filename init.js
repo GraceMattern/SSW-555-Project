@@ -36,6 +36,7 @@
   const restartButton = document.createElement("button");
   restartButton.innerHTML = "Restart";
   restartButton.onclick = () => {
+    alert("Restart successfully");
     overworld.init();
   };
   document.body.appendChild(restartButton);
