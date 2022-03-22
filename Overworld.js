@@ -63,6 +63,17 @@ window.OverworldMaps = {
         y: utils.withGrid(10),
         storyFlag: "Item-picked"
       }),
+    }),
+    pickapple: new PickApple({
+      x: utils.withGrid(10),
+      y: utils.withGrid(15),
+      storyFlag: "Item-picked"
+    }),
+    pickleek: new PickStrawberry({
+      x: utils.withGrid(20),
+      y: utils.withGrid(10),
+      storyFlag: "Item-picked"
+    }),
       protag: new Person({
         isPlayerControlled: true,
         x: utils.withGrid(5),
