@@ -7,23 +7,40 @@ class OverworldMap {
 
     this.upperImage = new Image();
     this.upperImage.src = config.upperSrc;
+
+    this.isCutscenePlaying = false;
+    this.isPaused = false;
   }
 
   drawLowerImage(ctx, cameraPerson) {
     ctx.drawImage(
-      this.lowerImage, 
-      utils.withGrid(10.5) - cameraPerson.x, 
+      this.lowerImage,
+      utils.withGrid(10.5) - cameraPerson.x,
       utils.withGrid(6) - cameraPerson.y
-      )
+    );
   }
 
   drawUpperImage(ctx, cameraPerson) {
     ctx.drawImage(
-      this.upperImage, 
-      utils.withGrid(10.5) - cameraPerson.x, 
+      this.upperImage,
+      utils.withGrid(10.5) - cameraPerson.x,
       utils.withGrid(6) - cameraPerson.y
-    )
-  } 
+    );
+  }
+
+  async startCutscene(events) {
+    this.isCutscenePlaying = true;
+
+    for (let i = 0; i < events.length; i++) {
+      const eventHandler = new OverworldEvent({
+        event: events[i],
+        map: this,
+      });
+      await eventHandler.init();
+    }
+
+    this.isCutscenePlaying = false;
+  }
 }
 
 window.OverworldMaps = {
@@ -71,20 +88,20 @@ class Overworld {
       const cameraPerson = this.map.gameObjects.protag;
 
       //Update all objects
-      Object.values(this.map.gameObjects).forEach(object => {
+      Object.values(this.map.gameObjects).forEach((object) => {
         object.update({
           arrow: this.directionInput.direction,
           map: this.map,
-        })
-      })
+        });
+      });
 
       // draw lower
       this.map.drawLowerImage(this.ctx, cameraPerson);
 
       //Draw Game Objects
-      Object.values(this.map.gameObjects).forEach(object => {
+      Object.values(this.map.gameObjects).forEach((object) => {
         object.sprite.draw(this.ctx, cameraPerson);
-      })
+      });
 
       // TODO upper
       // this.map.drawUpperImage(this.ctx, cameraPerson);
@@ -96,8 +113,19 @@ class Overworld {
     step();
   }
 
+  bindActionInput() {
+    new KeyPressListener("Escape", () => {
+      if (!this.map.isCutscenePlaying) {
+        this.map.startCutscene([{ type: "pause" }]);
+      }
+    });
+  }
+
   init() {
     this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
+
+    this.bindActionInput();
+
     this.directionInput = new DirectionInput();
     this.directionInput.init();
 
