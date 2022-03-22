@@ -1,3 +1,69 @@
+class OverworldMap {
+  constructor(config) {
+    this.gameObjects = config.gameObjects;
+
+    this.lowerImage = new Image();
+    this.lowerImage.src = config.lowerSrc;
+
+    this.upperImage = new Image();
+    this.upperImage.src = config.upperSrc;
+
+    this.isCutscenePlaying = false;
+    this.isPaused = false;
+  }
+
+  drawLowerImage(ctx, cameraPerson) {
+    ctx.drawImage(
+      this.lowerImage,
+      utils.withGrid(10.5) - cameraPerson.x,
+      utils.withGrid(6) - cameraPerson.y
+    );
+  }
+
+  drawUpperImage(ctx, cameraPerson) {
+    ctx.drawImage(
+      this.upperImage,
+      utils.withGrid(10.5) - cameraPerson.x,
+      utils.withGrid(6) - cameraPerson.y
+    );
+  }
+
+  async startCutscene(events) {
+    this.isCutscenePlaying = true;
+
+    for (let i = 0; i < events.length; i++) {
+      const eventHandler = new OverworldEvent({
+        event: events[i],
+        map: this,
+      });
+      await eventHandler.init();
+    }
+
+    this.isCutscenePlaying = false;
+  }
+}
+
+window.OverworldMaps = {
+  DemoRoom: {
+    lowerSrc: "assets/images/maps/map_3.png",
+    // upperSrc: "", // TODO
+    gameObjects: {
+      npc1: new GameObject({
+        x: utils.withGrid(0),
+        y: utils.withGrid(0),
+        src: "/assets/images/characters/sprite02.png",
+      }),
+      protag: new Person({
+        isPlayerControlled: true,
+        x: utils.withGrid(5),
+        y: utils.withGrid(6),
+      }),
+    },
+  },
+};
+
+// ===================================================
+
 class Overworld {
   constructor(config) {
     this.element = config.element;
@@ -14,19 +80,27 @@ class Overworld {
       // clear per frame
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-      // lower
-      this.map.drawLowerImage(this.ctx);
+      //Establish the camera person
+      const cameraPerson = this.map.gameObjects.protag;
 
-      // objs
+      //Update all objects
       Object.values(this.map.gameObjects).forEach((object) => {
         object.update({
           arrow: this.directionInput.direction,
+          map: this.map,
         });
-        object.sprite.draw(this.ctx);
+      });
+
+      // draw lower
+      this.map.drawLowerImage(this.ctx, cameraPerson);
+
+      //Draw Game Objects
+      Object.values(this.map.gameObjects).forEach((object) => {
+        object.sprite.draw(this.ctx, cameraPerson);
       });
 
       // TODO upper
-      // this.map.drawUpperImage(this.ctx);
+      // this.map.drawUpperImage(this.ctx, cameraPerson);
 
       requestAnimationFrame(() => {
         step();
@@ -39,6 +113,12 @@ class Overworld {
     new KeyPressListener("Enter", () => {
       //Is there a person here to talk to?
       this.map.checkForActionCutscene();
+    });
+    
+    new KeyPressListener("Escape", () => {
+      if (!this.map.isCutscenePlaying) {
+        this.map.startCutscene([{ type: "pause" }]);
+      }
     });
   }
 
