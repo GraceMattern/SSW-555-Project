@@ -30,6 +30,10 @@ class OverworldMap {
     );
   }
 
+  isSpaceTaken(currentX, currentY, direction) {
+    const { x, y } = utils.nextPosition(currentX, currentY, direction);
+    return this.walls[`${x},${y}`] || false;
+  }
   mountObjects() {
     Object.keys(this.gameObjects).forEach((key) => {
       //TODO: determine if this object should actually mount
@@ -38,9 +42,17 @@ class OverworldMap {
       object.mount(this);
     });
   }
-  isSpaceTaken(currentX, currentY, direction) {
-    const { x, y } = utils.nextPosition(currentX, currentY, direction);
-    return this.walls[`${x},${y}`] || false;
+
+  addWall(x, y) {
+    this.walls[`${x},${y}`] = true;
+  }
+  removeWall(x, y) {
+    delete this.walls[`${x},${y}`];
+  }
+  moveWall(wasX, wasY, direction) {
+    this.removeWall(wasX, wasY);
+    const { x, y } = utils.nextPosition(wasX, wasY, direction);
+    this.addWall(x, y);
   }
 
   async startCutscene(events) {
@@ -76,18 +88,6 @@ class OverworldMap {
       this.startCutscene(match[0].events);
     }
   }
-
-  addWall(x, y) {
-    this.walls[`${x},${y}`] = true;
-  }
-  removeWall(x, y) {
-    delete this.walls[`${x},${y}`];
-  }
-  moveWall(wasX, wasY, direction) {
-    this.removeWall(wasX, wasY);
-    const { x, y } = utils.nextPosition(wasX, wasY, direction);
-    this.addWall(x, y);
-  }
 }
 
 window.OverworldMaps = {
@@ -97,8 +97,8 @@ window.OverworldMaps = {
     gameObjects: {
       protag: new Person({
         isPlayerControlled: true,
-        x: utils.withGrid(5),
-        y: utils.withGrid(6),
+        x: utils.withGrid(6),
+        y: utils.withGrid(5),
       }),
       npc1: new Person({
         x: utils.withGrid(0),
