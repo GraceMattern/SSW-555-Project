@@ -87,11 +87,11 @@ class PickApple extends GameObject {
      ]
     
   }
-  update() {
-     this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
-     ? "used-down"
-     : "unused-down";
-   }
+  // update() {
+  //    this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
+  //    ? "used-down"
+  //    : "unused-down";
+  //  }
 }
 //This is the class for the user to pick a srawberry
 
@@ -129,11 +129,11 @@ class PickStrawberry extends GameObject {
      ]
     
   }
-    update() {
-      this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
-      ? "used-down"
-      : "unused-down";
-    }
+    // update() {
+    //   this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
+    //   ? "used-down"
+    //   : "unused-down";
+    // }
 }
 
 // =======================================
