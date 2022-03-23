@@ -32,7 +32,7 @@ class PlayerState {
 
   addFruit(fruitId) {
     const newId = `p${Date.now()}`+Math.floor(Math.random() * 99999);
-    this.fruits[newId] = {
+    this.Fruits[newId] = {
       fruitId,
       hp: 50,
       maxHp: 50,
