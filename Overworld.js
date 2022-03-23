@@ -64,6 +64,18 @@ class OverworldMap {
     }
   }
 
+  checkForPick() {
+    let pick;
+    const hero = this.gameObjects["protag"];
+    const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
+    const match = Object.values(this.gameObjects).find((object) => {
+      return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`;
+    });
+    if (!this.isCutscenePlaying && match && match.pick.length) {
+      delete `${match.x},${match.y}`;
+    }
+  }
+
   checkForFootstepCutscene() {
     const hero = this.gameObjects["protag"];
     const match = this.cutsceneSpaces[`${hero.x},${hero.y}`];
@@ -89,12 +101,29 @@ class OverworldMap {
 window.OverworldMaps = {
   DemoRoom: {
     lowerSrc: "assets/images/maps/map_3.png",
+
     // upperSrc: "", // TODO
     gameObjects: {
       protag: new Person({
         isPlayerControlled: true,
         x: utils.withGrid(5),
         y: utils.withGrid(6),
+      }),
+      herb: new Person({
+        x: utils.withGrid(4),
+        y: utils.withGrid(4),
+        src: "/assets/images/food/sage.png",
+        pick: [
+          {
+            events: [
+              {
+                type: "sage",
+                score: 25,
+                visible: true,
+              },
+            ],
+          },
+        ],
       }),
       npc1: new Person({
         x: utils.withGrid(0),
@@ -137,7 +166,6 @@ window.OverworldMaps = {
 };
 
 // =====================================================
-
 
 class Overworld {
   constructor(config) {
@@ -188,6 +216,7 @@ class Overworld {
     new KeyPressListener("Enter", () => {
       //Is there a person here to talk to?
       this.map.checkForActionCutscene();
+      this.map.checkForPick();
     });
 
     new KeyPressListener("Escape", () => {
@@ -212,6 +241,7 @@ class Overworld {
 
     this.bindActionInput();
     this.bindHeroPositionCheck();
+    console.log(this.map.pick);
 
     this.directionInput = new DirectionInput();
     this.directionInput.init();

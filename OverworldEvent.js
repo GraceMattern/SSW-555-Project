@@ -4,6 +4,14 @@ class OverworldEvent {
     this.event = event;
   }
 
+  pick(resolve) {
+    debugger;
+    const message = new TextMessage({
+      text: this.event.text,
+      onComplete: () => resolve(),
+    });
+  }
+
   pause(resolve) {
     this.map.isPaused = true;
     const menu = new PauseMenu({

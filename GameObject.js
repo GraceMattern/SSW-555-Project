@@ -15,6 +15,7 @@ class GameObject {
     this.behaviorLoopIndex = 0;
 
     this.talking = config.talking || [];
+    this.pick = config.pick || [];
   }
 
   mount(map) {
@@ -126,12 +127,16 @@ class Person extends GameObject {
   }
 
   updateSprite(state) {
-    if (this.isPlayerControlled && this.movingProgressRemaining === 0 && !state.arrow) {
-      this.sprite.setAnimation("idle-"+this.direction);
+    if (
+      this.isPlayerControlled &&
+      this.movingProgressRemaining === 0 &&
+      !state.arrow
+    ) {
+      this.sprite.setAnimation("idle-" + this.direction);
       return;
     }
     if (this.movingProgressRemaining > 0) {
-      this.sprite.setAnimation("walk-"+this.direction);
+      this.sprite.setAnimation("walk-" + this.direction);
     }
   }
 }
