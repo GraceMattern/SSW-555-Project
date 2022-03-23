@@ -195,6 +195,11 @@ class Overworld {
         this.map.startCutscene([{ type: "pause" }]);
       }
     });
+
+    new KeyPressListener("p", () => {
+      //Check one space away from current location for picking up object.
+      //Add object counter to inventory
+    });
   }
 
   bindHeroPositionCheck() {
