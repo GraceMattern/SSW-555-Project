@@ -25,6 +25,7 @@ class DirectionInput {
         this.heldDirections.unshift(dir);
       }
     });
+
     document.addEventListener("keyup", (e) => {
       const dir = this.map[e.code];
       const index = this.heldDirections.indexOf(dir);
