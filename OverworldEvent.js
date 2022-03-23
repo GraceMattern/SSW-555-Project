@@ -81,21 +81,21 @@ class OverworldEvent {
     resolve();
   }
   //This is to flag if the user has visited the item
-  addStoryFlag(resolve) {
-    return new Promise(resolve => {
-      this[this.event.this](resolve)
-    })
-  }
+  // addStoryFlag(resolve) {
+  //   return new Promise(resolve => {
+  //     this[this.event.this](resolve)
+  //   })
+  // }
   //This code is to push the items collected to an inventory
-  CraftingMenu(resolve) {
-    const menu = new this.CraftingMenu({
-      fruits: this.event.fruits,
-      onComplete: () => {
-        resolve();
-      }
-    })
-    menu.init(document.querySelector(".game-container"))
-  }
+  // CraftingMenu(resolve) {
+  //   const menu = new this.CraftingMenu({
+  //     fruits: this.event.fruits,
+  //     onComplete: () => {
+  //       resolve();
+  //     }
+  //   })
+  //   menu.init(document.querySelector(".game-container"))
+  // }
 
   init() {
     return new Promise((resolve) => {
