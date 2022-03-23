@@ -106,7 +106,7 @@ window.OverworldMaps = {
        storyFlag: "Apple_picked"
       //   fruits:["A1","SB1"]
       }),
-      pickleek: new PickStrawberry({
+      pickstrawberry: new PickStrawberry({
         x: utils.withGrid(20),
         y: utils.withGrid(10),
         storyFlag: "Strawberry_picked",
@@ -117,8 +117,8 @@ window.OverworldMaps = {
         y: utils.withGrid(0),
         src: "/assets/images/characters/sprite02.png",
         behaviorLoop: [
-          // { type: "stand", direction: "left", time: 800 },
-          // { type: "stand", direction: "right", time: 1200 },
+          { type: "stand", direction: "left", time: 800 },
+          { type: "stand", direction: "right", time: 1200 },
         ],
         talking: [
           {

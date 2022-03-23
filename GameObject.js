@@ -52,88 +52,78 @@ class GameObject {
     this.doBehaviorEvent(map);
   }
 }
-//This is the class for the user to pick an apple
+// //This is the class for the user to pick an apple
 class PickApple extends GameObject {
-  
   constructor(config) {
-    
     super(config);
     this.sprite = new Sprite({
       gameObject: this,
       src: "/assets/images/food/Apple.png",
       animations: {
-        "used-down"   : [ [0,0] ],
-        //"unused-down" : [ [1,0] ],
+        "used-down": [[0, 0]],
+        "unused-down": [[1, 0]],
       },
-      currentAnimation: "used-down"  
+      currentAnimation: "used-down",
     });
     this.storyFlag = config.storyFlag;
-    this.fruits=config.fruits
+    this.fruits = config.fruits;
 
-     this.talking = [
-       {
-         required: [this.storyFlag],
-         events: [
-           { type: "textMessage", text: "You have already used this." },
-         ]
-       },
-       {
-         events: [
-           { type: "textMessage", text: "Approaching an apple..." },
-           { type: "craftingMenu", pizzas: this.fruits },
-           { type: "addStoryFlag", flag: this.storyFlag },
-         ]
-       }
-     ]
-    
+    this.talking = [
+      {
+        required: [this.storyFlag],
+        events: [{ type: "textMessage", text: "You have already used this." }],
+      },
+      {
+        events: [
+          { type: "textMessage", text: "Approaching an apple..." },
+          { type: "craftingMenu", fruits: this.fruits },
+          { type: "addStoryFlag", flag: this.storyFlag },
+        ],
+      },
+    ];
   }
-  // update() {
-  //    this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
-  //    ? "used-down"
-  //    : "unused-down";
-  //  }
+//   // update() {
+//   //    this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
+//   //    ? "used-down"
+//   //    : "unused-down";
+//   //  }
 }
 //This is the class for the user to pick a srawberry
 
 class PickStrawberry extends GameObject {
-  
   constructor(config) {
-    
     super(config);
     this.sprite = new Sprite({
       gameObject: this,
       src: "/assets/images/food/Strawberry.png",
       animations: {
-        "used-down"   : [ [0,0] ],
-       // "unused-down" : [ [1,0] ],
+        "used-down": [[0, 0]],
+        "unused-down" : [ [1,0] ],
       },
-      currentAnimation: "used-down"  
+      currentAnimation: "used-down",
     });
     this.storyFlag = config.storyFlag;
-    this.fruits=config.fruits
+    this.fruits = config.fruits;
 
-     this.talking = [
-       {
-         required: [this.storyFlag],
-         events: [
-           { type: "textMessage", text: "You have already used this." },
-         ]
-       },
-       {
-         events: [
-           { type: "textMessage", text: "Approaching a Strawberry..." },
-           { type: "craftingMenu", fruits: this.fruits },
-           { type: "addStoryFlag", flag: this.storyFlag },
-         ]
-       }
-     ]
-    
+    this.talking = [
+      {
+        required: [this.storyFlag],
+        events: [{ type: "textMessage", text: "You have already used this." }],
+      },
+      {
+        events: [
+          { type: "textMessage", text: "Approaching a Strawberry..." },
+          { type: "craftingMenu", fruits: this.fruits },
+          { type: "addStoryFlag", flag: this.storyFlag },
+        ],
+      },
+    ];
   }
-    // update() {
-    //   this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
-    //   ? "used-down"
-    //   : "unused-down";
-    // }
+//   // update() {
+//   //   this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
+//   //   ? "used-down"
+//   //   : "unused-down";
+//   // }
 }
 
 class Person extends GameObject {
