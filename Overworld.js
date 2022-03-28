@@ -138,7 +138,6 @@ window.OverworldMaps = {
 
 // =====================================================
 
-
 class Overworld {
   constructor(config) {
     this.element = config.element;
@@ -188,6 +187,13 @@ class Overworld {
     new KeyPressListener("Enter", () => {
       //Is there a person here to talk to?
       this.map.checkForActionCutscene();
+    });
+
+    new KeyPressListener("Tab", () => {
+      //Is there a person here to talk to?
+      if (!this.map.isCutscenePlaying) {
+        this.map.startCutscene([{ type: "inventory" }]);
+      }
     });
 
     new KeyPressListener("Escape", () => {
