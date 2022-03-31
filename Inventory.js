@@ -8,10 +8,20 @@ class Inventory {
     };
   }
   fetCounters(word) {
-    return this.counters[word];
+  
+    //let inventory = this.counters;
+    //localStorage.setItem("inventory", inventory);
+    //debugger
+    let inventory = JSON.parse(localStorage.getItem("inventory"));
+    //console.log(inventory);
+    if (!inventory){
+      return this.counters[word];
+    }
+    return inventory[word];
   }
 
   getOptions(pageKey) {
+    //let inv = {"sage" : 0, "apple" : 0, "leeks" : 0};
     //Case 1: Show the first page of options
     if (pageKey === "root") {
       return [
@@ -21,6 +31,7 @@ class Inventory {
           description: "Sage",
           handler: () => {
             this.counters.sage += 1;
+            localStorage.setItem("inventory", JSON.stringify(this.counters));
             console.log(this.counters.sage);
             return `Sage : ${this.counters.sage}`;
             // window.location.reload(true);
@@ -33,6 +44,8 @@ class Inventory {
           description: "Apple",
           handler: () => {
             this.counters.apple += 1;
+            localStorage.setItem("inventory", JSON.stringify(this.counters));
+
             console.log(this.counters.apple);
             return `Apple : ${this.counters.apple}`;
           },
@@ -43,7 +56,9 @@ class Inventory {
           description: "Leek",
           handler: () => {
             this.counters.leeks += 1;
-            console.log(this.counters.leeks);
+            //console.log(this.counters.leeks);
+            localStorage.setItem("inventory", JSON.stringify(this.counters));
+            console.log(localStorage.getItem("inventory"));
             return `Leek : ${this.counters.leeks}`;
           },
         },
