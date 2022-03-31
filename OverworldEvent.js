@@ -5,7 +5,6 @@ class OverworldEvent {
   }
 
   pick(resolve) {
-    debugger;
     const message = new TextMessage({
       text: this.event.text,
       onComplete: () => resolve(),

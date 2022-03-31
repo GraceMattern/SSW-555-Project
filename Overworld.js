@@ -98,6 +98,7 @@ class OverworldMap {
   }
 }
 
+
 window.OverworldMaps = {
   DemoRoom: {
     lowerSrc: "assets/images/maps/map_3.png",

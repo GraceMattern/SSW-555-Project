@@ -71,19 +71,38 @@ class Person extends GameObject {
     };
   }
 
-  update(state) {
-    this.updatePosition();
-    this.updateSprite(state);
+  // update(state) {
+  //   this.updatePosition();
+  //   this.updateSprite(state);
 
-    if (
-      this.isPlayerControlled &&
-      this.movingProgressRemaining === 0 &&
-      state.arrow
-    ) {
-      this.direction = state.arrow;
-      this.movingProgressRemaining = 16;
+  //   if (
+  //     this.isPlayerControlled &&
+  //     this.movingProgressRemaining === 0 &&
+  //     state.arrow
+  //   ) {
+  //     this.direction = state.arrow;
+  //     this.movingProgressRemaining = 16;
+  //   }
+  // }
+
+  update(state) {
+    if (this.movingProgressRemaining > 0) {
+      this.updatePosition();
+    } else {
+      if (
+        this.isPlayerControlled &&
+        this.movingProgressRemaining === 0 &&
+        state.arrow
+      ) {
+        this.startBehavior(state, {
+          type: "walk",
+          direction: state.arrow,
+        });
+      }
+      this.updateSprite(state);
     }
   }
+
   startBehavior(state, behavior) {
     //Set character direction to whatever behavior has
     this.direction = behavior.direction;
