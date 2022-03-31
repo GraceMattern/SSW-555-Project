@@ -14,10 +14,13 @@ class KeyboardMenu {
         const disabledAttr = option.disabled ? "disabled" : "";
         return `
           <div class="option">
-            <button ${disabledAttr} data-button="${index}" data-description="${
-          option.description
-        }">
-              ${option.label}
+            <button ${disabledAttr} id="${
+          option.label
+        }" data-button="${index}" data-description="${option.description}">
+              <span id="span-${option.label}">${option.label} : ${
+          option.count
+        }</span>
+      
             </button>
             <span class="right">${option.right ? option.right() : ""}</span>
           </div>
@@ -26,9 +29,12 @@ class KeyboardMenu {
       .join("");
 
     this.element.querySelectorAll("button").forEach((button) => {
-      button.addEventListener("click", () => {
+      button.addEventListener("click", (evt) => {
         const chosenOption = this.options[Number(button.dataset.button)];
-        chosenOption.handler();
+        const newCounter = chosenOption.handler();
+        // (fetCounters(evt.target.id))
+        console.log(document.getElementById(evt.target.id));
+        document.getElementById(evt.target.id).textContent = newCounter;
       });
       button.addEventListener("mouseenter", () => {
         button.focus();

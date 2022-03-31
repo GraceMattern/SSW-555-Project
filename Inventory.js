@@ -1,6 +1,14 @@
 class Inventory {
   constructor({ onComplete }) {
     this.onComplete = onComplete;
+    this.counters = {
+      sage: 0,
+      apple: 0,
+      leeks: 0,
+    };
+  }
+  fetCounters(word) {
+    return this.counters[word];
   }
 
   getOptions(pageKey) {
@@ -9,25 +17,34 @@ class Inventory {
       return [
         {
           label: "Sage",
-          count: 0,
-          description: 0,
+          count: this.fetCounters("sage"),
+          description: "Sage",
           handler: () => {
-            //window.location.reload(true);
-            //We'll come back to this...
+            this.counters.sage += 1;
+            console.log(this.counters.sage);
+            return `Sage : ${this.counters.sage}`;
+            // window.location.reload(true);
+            // We'll come back to this...
           },
         },
         {
           label: "Apple",
+          count: this.fetCounters("apple"),
           description: "Apple",
           handler: () => {
-            //Quit Screen
+            this.counters.apple += 1;
+            console.log(this.counters.apple);
+            return `Apple : ${this.counters.apple}`;
           },
         },
         {
           label: "Leek",
+          count: this.fetCounters("leeks"),
           description: "Leek",
           handler: () => {
-            //this.close();
+            this.counters.leeks += 1;
+            console.log(this.counters.leeks);
+            return `Leek : ${this.counters.leeks}`;
           },
         },
         // {
