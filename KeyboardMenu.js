@@ -17,8 +17,8 @@ class KeyboardMenu {
             <button ${disabledAttr} id="${
           option.label
         }" data-button="${index}" data-description="${option.description}">
-              <span id="span-${option.label}">${option.label} : ${
-          option.count
+              <span id="span-${option.label}">${option.label}  ${
+          typeof option.count === "undefined" ? "" : `: ${option.count}`
         }</span>
       
             </button>
