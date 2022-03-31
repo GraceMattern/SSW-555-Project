@@ -30,6 +30,11 @@ class OverworldMap {
     );
   }
 
+  isSpaceTaken(currentX, currentY, direction) {
+    const { x, y } = utils.nextPosition(currentX, currentY, direction);
+    return this.walls[`${x},${y}`] || false;
+  }
+
   mountObjects() {
     Object.keys(this.gameObjects).forEach((key) => {
       //TODO: determine if this object should actually mount
@@ -72,6 +77,7 @@ class OverworldMap {
       return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`;
     });
     if (!this.isCutscenePlaying && match && match.pick.length) {
+      console.log(match);
       delete `${match.x},${match.y}`;
     }
   }
@@ -98,10 +104,9 @@ class OverworldMap {
   }
 }
 
-
 window.OverworldMaps = {
   DemoRoom: {
-    lowerSrc: "assets/images/maps/map_3.png",
+    lowerSrc: "assets/images/maps/newmap.png",
 
     // upperSrc: "", // TODO
     gameObjects: {
@@ -110,6 +115,7 @@ window.OverworldMaps = {
         x: utils.withGrid(5),
         y: utils.withGrid(6),
       }),
+
       herb: new Person({
         x: utils.withGrid(4),
         y: utils.withGrid(4),
@@ -148,6 +154,20 @@ window.OverworldMaps = {
         ],
       }),
     },
+    walls: {
+      [utils.asGridCoord(9, 9)]: true,
+      [utils.asGridCoord(9, 10)]: true,
+      [utils.asGridCoord(9, 11)]: true,
+      [utils.asGridCoord(9, 12)]: true,
+      [utils.asGridCoord(9, 13)]: true,
+      [utils.asGridCoord(9, 8)]: true,
+      [utils.asGridCoord(10, 8)]: true,
+      [utils.asGridCoord(11, 8)]: true,
+      [utils.asGridCoord(12, 8)]: true,
+      [utils.asGridCoord(13, 8)]: true,
+      [utils.asGridCoord(14, 8)]: true,
+    },
+
     cutsceneSpaces: {
       // [utils.asGridCoord(7, 8)]: [
       //   {
