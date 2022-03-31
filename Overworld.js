@@ -97,16 +97,16 @@ window.OverworldMaps = {
         y: utils.withGrid(6),
       }),
       pickapple: new PickApple({
-        x: utils.withGrid(10),
-        y: utils.withGrid(15),
+        x: utils.withGrid(5),
+        y: utils.withGrid(5),
        storyFlag: "Apple_picked"
       //   fruits:["A1","SB1"]
       }),
       pickstrawberry: new PickStrawberry({
-        x: utils.withGrid(20),
-        y: utils.withGrid(10),
+        x: utils.withGrid(5),
+        y: utils.withGrid(4),
         storyFlag: "Strawberry_picked",
-        // fruits:["A1","SB1"]
+        fruits:["A1","SB1"]
       }),
       npc1: new Person({
         x: utils.withGrid(0),

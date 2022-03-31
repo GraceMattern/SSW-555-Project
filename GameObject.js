@@ -58,10 +58,10 @@ class PickApple extends GameObject {
     super(config);
     this.sprite = new Sprite({
       gameObject: this,
-      src: "/assets/images/food/Apple.png",
+      src: "/assets/images/food/test3.png",
       animations: {
-        "used-down": [[0, 0]],
-        "unused-down": [[1, 0]],
+        "used-down": [[0.5, 1]],
+        "unused-down": [[0, 0.5]],
       },
       currentAnimation: "used-down",
     });
@@ -70,23 +70,29 @@ class PickApple extends GameObject {
 
     this.talking = [
       {
-        required: [this.storyFlag],
-        events: [{ type: "textMessage", text: "You have already used this." }],
-      },
-      {
         events: [
           { type: "textMessage", text: "Approaching an apple..." },
           { type: "craftingMenu", fruits: this.fruits },
           { type: "addStoryFlag", flag: this.storyFlag },
+          // {
+          //   required: [this.storyFlag],
+          //   events: [{ type: "textMessage", text: "You have already used this." }],
+          // },
         ],
       },
+
+      {
+        required: [this.storyFlag],
+        events: [{ type: "textMessage", text: "You have already used this." }],
+      },
+      
     ];
   }
-//   // update() {
-//   //    this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
-//   //    ? "used-down"
-//   //    : "unused-down";
-//   //  }
+  update() {
+   this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
+    ? "used-down"
+    : "unused-down";
+  }
 }
 //This is the class for the user to pick a srawberry
 
@@ -119,11 +125,11 @@ class PickStrawberry extends GameObject {
       },
     ];
   }
-//   // update() {
-//   //   this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
-//   //   ? "used-down"
-//   //   : "unused-down";
-//   // }
+  update() {
+    this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
+    ? "used-down"
+    : "unused-down";
+  }
 }
 
 // =======================================

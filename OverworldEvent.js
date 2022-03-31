@@ -87,8 +87,8 @@ class OverworldEvent {
     })
   }
   //This code is to push the items collected to an inventory
-  CraftingMenu(resolve) {
-    const menu = new this.CraftingMenu({
+  craftingMenu(resolve) {
+    const menu = new this.craftingMenu({
       fruits: this.event.fruits,
       onComplete: () => {
         resolve();
