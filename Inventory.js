@@ -1,22 +1,29 @@
 class Inventory {
   constructor({ onComplete }) {
     this.onComplete = onComplete;
-    this.counters = {
-      sage: 0,
-      apple: 0,
-      leeks: 0,
-    };
+    // this.counters = {
+    //   sage: 0,
+    //   apple: 0,
+    //   leeks: 0,
+    // };
   }
   fetCounters(word) {
-  
     //let inventory = this.counters;
     //localStorage.setItem("inventory", inventory);
-    //debugger
+    //debugger;
     let inventory = JSON.parse(localStorage.getItem("inventory"));
     //console.log(inventory);
-    if (!inventory){
-      return this.counters[word];
-    }
+    // if (!inventory) {
+    //   return this.counters[word];
+    // }
+    return inventory[word];
+  }
+
+  addToInventory(word) {
+    //debugger;
+    let inventory = JSON.parse(localStorage.getItem("inventory"));
+    inventory[word] += 1;
+    localStorage.setItem("inventory", JSON.stringify(inventory));
     return inventory[word];
   }
 
@@ -30,10 +37,10 @@ class Inventory {
           count: this.fetCounters("sage"),
           description: "Sage",
           handler: () => {
-            this.counters.sage += 1;
-            localStorage.setItem("inventory", JSON.stringify(this.counters));
-            console.log(this.counters.sage);
-            return `Sage : ${this.counters.sage}`;
+            //this.counters.sage += 1;
+            //localStorage.setItem("inventory", JSON.stringify(this.counters));
+            //console.log(this.counters.sage);
+            return `Sage : ${this.addToInventory("sage")}`;
             // window.location.reload(true);
             // We'll come back to this...
           },
@@ -43,11 +50,11 @@ class Inventory {
           count: this.fetCounters("apple"),
           description: "Apple",
           handler: () => {
-            this.counters.apple += 1;
-            localStorage.setItem("inventory", JSON.stringify(this.counters));
+            // this.counters.apple += 1;
+            // localStorage.setItem("inventory", JSON.stringify(this.counters));
 
-            console.log(this.counters.apple);
-            return `Apple : ${this.counters.apple}`;
+            // console.log(this.counters.apple);
+            return `Apple : ${this.addToInventory("apple")}`;
           },
         },
         {
@@ -55,11 +62,11 @@ class Inventory {
           count: this.fetCounters("leeks"),
           description: "Leek",
           handler: () => {
-            this.counters.leeks += 1;
-            //console.log(this.counters.leeks);
-            localStorage.setItem("inventory", JSON.stringify(this.counters));
-            console.log(localStorage.getItem("inventory"));
-            return `Leek : ${this.counters.leeks}`;
+            // this.counters.leeks += 1;
+            // //console.log(this.counters.leeks);
+            // localStorage.setItem("inventory", JSON.stringify(this.counters));
+            // console.log(localStorage.getItem("inventory"));
+            return `Leek : ${this.addToInventory("leeks")}`;
           },
         },
         // {

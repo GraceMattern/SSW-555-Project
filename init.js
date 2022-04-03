@@ -14,6 +14,14 @@
   var btn = document.getElementById("btn");
   btn.innerHTML = "Start Game";
 
+  //init local storage
+  inventory = {
+    sage: 0,
+    apple: 0,
+    leeks: 0,
+  };
+  localStorage.setItem("inventory", JSON.stringify(inventory));
+
   btn.addEventListener("click", () => {
     btn.hidden = true;
     var difficultyLevel = document.getElementById("levels").value;
