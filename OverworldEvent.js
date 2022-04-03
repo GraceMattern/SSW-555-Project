@@ -22,6 +22,17 @@ class OverworldEvent {
     menu.init(document.querySelector(".game-container"));
   }
 
+  inventory(resolve) {
+    this.map.isPaused = true;
+    const menu = new Inventory({
+      onComplete: () => {
+        resolve();
+        this.map.isPaused = false;
+      },
+    });
+    menu.init(document.querySelector(".game-container"));
+  }
+
   stand(resolve) {
     const who = this.map.gameObjects[this.event.who];
     who.startBehavior(

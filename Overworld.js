@@ -240,6 +240,13 @@ class Overworld {
       this.map.checkForPick();
     });
 
+    new KeyPressListener("Tab", () => {
+      //Is there a person here to talk to?
+      if (!this.map.isCutscenePlaying) {
+        this.map.startCutscene([{ type: "inventory" }]);
+      }
+    });
+
     new KeyPressListener("Escape", () => {
       if (!this.map.isCutscenePlaying) {
         this.map.startCutscene([{ type: "pause" }]);
