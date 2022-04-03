@@ -8,18 +8,25 @@ class PauseMenu {
     if (pageKey === "root") {
       return [
         {
-          label: "Replay Game",
-          description: "Replay the game",
+          label: "Replay",
+          description: "Replay",
           handler: () => {
             window.location.reload(true);
             //We'll come back to this...
           },
         },
         {
-          label: "Quit Game",
-          description: "Quit the game",
+          label: "Restart",
+          description: "Restart",
           handler: () => {
-            //Quit Screen
+            window.location.reload(true);
+          },
+        },
+        {
+          label: "Quit",
+          description: "Quit",
+          handler: () => {
+            self.close();
           },
         },
         {
