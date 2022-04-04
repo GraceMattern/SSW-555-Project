@@ -151,7 +151,6 @@ window.OverworldMaps = {
 
 // =====================================================
 
-
 class Overworld {
   constructor(config) {
     this.element = config.element;
@@ -203,6 +202,13 @@ class Overworld {
       this.map.checkForActionCutscene();
     });
 
+    new KeyPressListener("Tab", () => {
+      //Is there a person here to talk to?
+      if (!this.map.isCutscenePlaying) {
+        this.map.startCutscene([{ type: "inventory" }]);
+      }
+    });
+
     new KeyPressListener("Escape", () => {
       if (!this.map.isCutscenePlaying) {
         this.map.startCutscene([{ type: "pause" }]);
@@ -236,10 +242,10 @@ class Overworld {
       // { who: "npc1", type: "walk", direction: "down", time: 800 },
       {
         type: "textMessage",
-        text: "Welcome to The Giving Garden! Press next.",
+        text: "Welcome to The Giving Garden! Your mission is to collect items, craft goods, and gift those goods. Press next.",
       },
 
-      { type: "textMessage", text: "Start moving by pressing Arrow keys" },
+      { type: "textMessage", text: "Start moving by pressing the arrow or WASD keys." },
     ]);
   }
 }
