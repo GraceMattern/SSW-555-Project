@@ -17,6 +17,7 @@
     sage: 0,
     apple: 0,
     leeks: 0,
+    herb: 0, //added by sv
   };
   localStorage.setItem("inventory", JSON.stringify(inventory));
 
