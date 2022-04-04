@@ -63,24 +63,18 @@ class PickApple extends GameObject {
         "used-down": [[0.5, 1]],
         "unused-down": [[0, 0.5]],
       },
-      currentAnimation: "used-down",
+      currentAnimation: "unused-down",
     });
     this.storyFlag = config.storyFlag;
     this.fruits = config.fruits;
-
     this.talking = [
       {
         events: [
           { type: "textMessage", text: "Approaching an apple..." },
-          { type: "craftingMenu", fruits: this.fruits },
           { type: "addStoryFlag", flag: this.storyFlag },
-          // {
-          //   required: [this.storyFlag],
-          //   events: [{ type: "textMessage", text: "You have already used this." }],
-          // },
+          { type: "craftingMenu", fruits: this.fruits },
         ],
       },
-
       {
         required: [this.storyFlag],
         events: [{ type: "textMessage", text: "You have already used this." }],
