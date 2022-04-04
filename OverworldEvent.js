@@ -4,9 +4,27 @@ class OverworldEvent {
     this.event = event;
   }
 
+  pick(resolve) {
+    const message = new TextMessage({
+      text: this.event.text,
+      onComplete: () => resolve(),
+    });
+  }
+
   pause(resolve) {
     this.map.isPaused = true;
     const menu = new PauseMenu({
+      onComplete: () => {
+        resolve();
+        this.map.isPaused = false;
+      },
+    });
+    menu.init(document.querySelector(".game-container"));
+  }
+
+  inventory(resolve) {
+    this.map.isPaused = true;
+    const menu = new Inventory({
       onComplete: () => {
         resolve();
         this.map.isPaused = false;

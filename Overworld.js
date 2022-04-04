@@ -34,6 +34,7 @@ class OverworldMap {
     const { x, y } = utils.nextPosition(currentX, currentY, direction);
     return this.walls[`${x},${y}`] || false;
   }
+
   mountObjects() {
     Object.keys(this.gameObjects).forEach((key) => {
       //TODO: determine if this object should actually mount
@@ -41,18 +42,6 @@ class OverworldMap {
       object.id = key;
       object.mount(this);
     });
-  }
-
-  addWall(x, y) {
-    this.walls[`${x},${y}`] = true;
-  }
-  removeWall(x, y) {
-    delete this.walls[`${x},${y}`];
-  }
-  moveWall(wasX, wasY, direction) {
-    this.removeWall(wasX, wasY);
-    const { x, y } = utils.nextPosition(wasX, wasY, direction);
-    this.addWall(x, y);
   }
 
   async startCutscene(events) {
@@ -80,6 +69,21 @@ class OverworldMap {
     }
   }
 
+  //added by sv
+  checkForPick() {
+    let pick;
+    const hero = this.gameObjects["protag"];
+    const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
+    const match = Object.values(this.gameObjects).find((object) => {
+      return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`;
+    });
+    if (!this.isCutscenePlaying && match && match.pick.length) {
+      console.log(match);
+      const addToInventory = new Inventory({ onComplete: () => resolve() });
+      addToInventory.addToInventory(match.id);
+    }
+  }
+
   checkForFootstepCutscene() {
     const hero = this.gameObjects["protag"];
     const match = this.cutsceneSpaces[`${hero.x},${hero.y}`];
@@ -88,18 +92,66 @@ class OverworldMap {
       this.startCutscene(match[0].events);
     }
   }
+
+  addWall(x, y) {
+    this.walls[`${x},${y}`] = true;
+  }
+  removeWall(x, y) {
+    delete this.walls[`${x},${y}`];
+  }
+  moveWall(wasX, wasY, direction) {
+    this.removeWall(wasX, wasY);
+    const { x, y } = utils.nextPosition(wasX, wasY, direction);
+    this.addWall(x, y);
+  }
 }
 
 window.OverworldMaps = {
   DemoRoom: {
-    lowerSrc: "assets/images/maps/map_3.png",
+    lowerSrc: "assets/images/maps/newmap.png",
+
     // upperSrc: "", // TODO
     gameObjects: {
       protag: new Person({
         isPlayerControlled: true,
-        x: utils.withGrid(6),
-        y: utils.withGrid(5),
+        x: utils.withGrid(5),
+        y: utils.withGrid(6),
       }),
+
+      herb: new Person({
+        x: utils.withGrid(4),
+        y: utils.withGrid(4),
+        src: "/assets/images/food/sage.png",
+        pick: [
+          {
+            events: [
+              {
+                type: "sage",
+                score: 25,
+                visible: true,
+              },
+            ],
+          },
+        ],
+      }),
+
+      tomato: new Person({
+        x: utils.withGrid(7),
+        y: utils.withGrid(4),
+        src: "/assets/images/food/tomato.png",
+        pick: [
+          {
+            events: [
+              {
+                type: "tomato",
+                score: 25,
+                visible: true,
+              },
+            ],
+          },
+        ],
+      }),
+
       npc1: new Person({
         x: utils.withGrid(0),
         y: utils.withGrid(0),
@@ -122,6 +174,20 @@ window.OverworldMaps = {
         ],
       }),
     },
+    walls: {
+      [utils.asGridCoord(9, 9)]: true,
+      [utils.asGridCoord(9, 10)]: true,
+      [utils.asGridCoord(9, 11)]: true,
+      [utils.asGridCoord(9, 12)]: true,
+      [utils.asGridCoord(9, 13)]: true,
+      [utils.asGridCoord(9, 8)]: true,
+      [utils.asGridCoord(10, 8)]: true,
+      [utils.asGridCoord(11, 8)]: true,
+      [utils.asGridCoord(12, 8)]: true,
+      [utils.asGridCoord(13, 8)]: true,
+      [utils.asGridCoord(14, 8)]: true,
+    },
+
     cutsceneSpaces: {
       // [utils.asGridCoord(7, 8)]: [
       //   {
@@ -138,15 +204,9 @@ window.OverworldMaps = {
       // ],
     },
   },
-  walls: {
-    [utils.asGridCoord(0, 0)]: true,
-    [utils.asGridCoord(0, 1)]: true,
-    [utils.asGridCoord(0, 2)]: true,
-    [utils.asGridCoord(0, 3)]: true,
-    [utils.asGridCoord(0, 4)]: true,
-    [utils.asGridCoord(0, 5)]: true,
-  },
 };
+
+// =====================================================
 
 class Overworld {
   constructor(config) {
@@ -197,6 +257,14 @@ class Overworld {
     new KeyPressListener("Enter", () => {
       //Is there a person here to talk to?
       this.map.checkForActionCutscene();
+      this.map.checkForPick();
+    });
+
+    new KeyPressListener("Tab", () => {
+      //Is there a person here to talk to?
+      if (!this.map.isCutscenePlaying) {
+        this.map.startCutscene([{ type: "inventory" }]);
+      }
     });
 
     new KeyPressListener("Escape", () => {
@@ -226,6 +294,7 @@ class Overworld {
 
     this.bindActionInput();
     this.bindHeroPositionCheck();
+    console.log(this.map.pick);
 
     this.directionInput = new DirectionInput();
     this.directionInput.init();
@@ -237,10 +306,13 @@ class Overworld {
       // { who: "npc1", type: "walk", direction: "down", time: 800 },
       {
         type: "textMessage",
-        text: "Welcome to The Giving Garden! Press next.",
+        text: "Welcome to The Giving Garden! Your mission is to collect items, craft goods, and gift those goods. Press next.",
       },
 
-      { type: "textMessage", text: "Start moving by pressing Arrow keys" },
+      {
+        type: "textMessage",
+        text: "Start moving by pressing the arrow or WASD keys.",
+      },
     ]);
   }
 }

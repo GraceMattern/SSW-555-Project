@@ -15,6 +15,7 @@ class GameObject {
     this.behaviorLoopIndex = 0;
 
     this.talking = config.talking || [];
+    this.pick = config.pick || [];
   }
 
   mount(map) {
@@ -53,6 +54,8 @@ class GameObject {
   }
 }
 
+// =======================================
+
 class Person extends GameObject {
   constructor(config) {
     super(config);
@@ -67,6 +70,20 @@ class Person extends GameObject {
       right: ["x", 1],
     };
   }
+
+  // update(state) {
+  //   this.updatePosition();
+  //   this.updateSprite(state);
+
+  //   if (
+  //     this.isPlayerControlled &&
+  //     this.movingProgressRemaining === 0 &&
+  //     state.arrow
+  //   ) {
+  //     this.direction = state.arrow;
+  //     this.movingProgressRemaining = 16;
+  //   }
+  // }
 
   update(state) {
     if (this.movingProgressRemaining > 0) {
@@ -85,6 +102,7 @@ class Person extends GameObject {
       this.updateSprite(state);
     }
   }
+
   startBehavior(state, behavior) {
     //Set character direction to whatever behavior has
     this.direction = behavior.direction;
@@ -92,16 +110,16 @@ class Person extends GameObject {
     if (behavior.type === "walk") {
       //Stop here if space is not free
       if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
-        // behavior.retry &&
-        //   setTimeout(() => {
-        //     this.startBehavior(state, behavior);
-        //   }, 10);
+        behavior.retry &&
+          setTimeout(() => {
+            this.startBehavior(state, behavior);
+          }, 10);
         return;
       }
     }
 
     //Ready to walk!
-    state.map.moveWall(this.x, this.y, this.direction);
+    // state.map.moveWall(this.x, this.y, this.direction);
     this.movingProgressRemaining = 16;
     // this.updateSprite(state);
     if (behavior.type === "stand") {
