@@ -69,6 +69,7 @@ class OverworldMap {
     }
   }
 
+  //added by sv
   checkForPick() {
     let pick;
     const hero = this.gameObjects["protag"];
@@ -77,8 +78,8 @@ class OverworldMap {
       return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`;
     });
     if (!this.isCutscenePlaying && match && match.pick.length) {
-      console.log(match);
-      delete `${match.x},${match.y}`;
+      const addToInventory = new Inventory({ onComplete: () => resolve() });
+      addToInventory.addToInventory(match.id);
     }
   }
 
@@ -284,7 +285,10 @@ class Overworld {
         text: "Welcome to The Giving Garden! Your mission is to collect items, craft goods, and gift those goods. Press next.",
       },
 
-      { type: "textMessage", text: "Start moving by pressing the arrow or WASD keys." },
+      {
+        type: "textMessage",
+        text: "Start moving by pressing the arrow or WASD keys.",
+      },
     ]);
   }
 }
