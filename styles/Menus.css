@@ -1,5 +1,4 @@
 .PauseMenu {
-<<<<<<< HEAD
   position: absolute;
   left: 4.5em;
   top: 1em;
@@ -26,59 +25,31 @@
   text-align: center;
   border-bottom: 2px solid #000;
 }
-=======
-    position:absolute;
-    left:4.5em;
-    top:1em;
-    right:4.5em;
-    background: rgb(94, 126, 106);
-    color: #000;
-    border: 3px solid rgb(65, 114, 65);
-    z-index:2;
-    padding-left: 4px;
-    padding-right: 4px;
-    padding-bottom: 4px;
-  }
-  
-  .PauseMenu .KeyboardMenu {
-    position: relative;
-    border:0;
-  }
-  
-  .PauseMenu h2 {
-    font-size: 10px;
-    color: var(--menu-font-color);
-    margin:0;
-    padding: 2px 0;
-    text-align:center;
-    border-bottom: 2px solid #000;
-  }
 
 .Inventory {
-    position:absolute;
-    left:4.5em;
-    top:1em;
-    right:4.5em;
-    background: rgb(94, 126, 106);
-    color: #000;
-    border: 3px solid rgb(65, 114, 65);
-    z-index:2;
-    padding-left: 4px;
-    padding-right: 4px;
-    padding-bottom: 4px;
-  }
-  
-  .Inventory .KeyboardMenu {
-    position: relative;
-    border:0;
-  }
-  
-  .Inventory h2 {
-    font-size: 5        px;
-    color: var(--menu-font-color);
-    margin:0;
-    padding: 2px 0;
-    text-align:center;
-    border-bottom: 2px solid #000;
-  }
->>>>>>> inventory-dy
+  position: absolute;
+  left: 4.5em;
+  top: 1em;
+  right: 4.5em;
+  background: rgb(94, 126, 106);
+  color: #000;
+  border: 3px solid rgb(65, 114, 65);
+  z-index: 2;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-bottom: 4px;
+}
+
+.Inventory .KeyboardMenu {
+  position: relative;
+  border: 0;
+}
+
+.Inventory h2 {
+  font-size: 5 px;
+  color: var(--menu-font-color);
+  margin: 0;
+  padding: 2px 0;
+  text-align: center;
+  border-bottom: 2px solid #000;
+}
