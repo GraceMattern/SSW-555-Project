@@ -115,6 +115,7 @@ class Inventory {
     });
     this.keyboardMenu.init(this.element);
     this.keyboardMenu.setOptions(this.getOptions("root"));
+    // this.keyboardMenu.setInventoryOptions(this.getOptions("root"));
 
     container.appendChild(this.element);
 
