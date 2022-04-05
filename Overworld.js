@@ -78,7 +78,6 @@ class OverworldMap {
       return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`;
     });
     if (!this.isCutscenePlaying && match && match.pick.length) {
-      console.log(match);
       const addToInventory = new Inventory({ onComplete: () => resolve() });
       addToInventory.addToInventory(match.id);
     }
