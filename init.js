@@ -16,6 +16,7 @@
   inventory = {
     sage: 0,
     apple: 0,
+    Strawberry: 0, 
     leeks: 0,
     herb: 0, //added by sv
     tomato: 0, //added by hs

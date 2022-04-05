@@ -151,7 +151,7 @@ window.OverworldMaps = {
         ],
       }),
 
-      Apple: new Person({
+      apple: new Person({
         x: utils.withGrid(11),
         y: utils.withGrid(7),
         src: "/assets/images/food/Apple.png",
@@ -168,7 +168,24 @@ window.OverworldMaps = {
         ],
       }),
 
-      Strawberry: new Person({
+      leek: new Person({
+        x: utils.withGrid(5),
+        y: utils.withGrid(6),
+        src: "/assets/images/food/Leek.png",
+        pick: [
+          {
+            events: [
+              {
+                type: "Leek",
+                score: 25,
+                visible: true,
+              },
+            ],
+          },
+        ],
+      }),
+
+      strawberry: new Person({
         x: utils.withGrid(8),
         y: utils.withGrid(9),
         src: "/assets/images/food/Strawberry.png",
