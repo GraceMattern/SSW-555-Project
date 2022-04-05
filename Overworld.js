@@ -151,6 +151,40 @@ window.OverworldMaps = {
         ],
       }),
 
+      Apple: new Person({
+        x: utils.withGrid(11),
+        y: utils.withGrid(7),
+        src: "/assets/images/food/Apple.png",
+        pick: [
+          {
+            events: [
+              {
+                type: "Apple",
+                score: 25,
+                visible: true,
+              },
+            ],
+          },
+        ],
+      }),
+
+      Strawberry: new Person({
+        x: utils.withGrid(8),
+        y: utils.withGrid(9),
+        src: "/assets/images/food/Strawberry.png",
+        pick: [
+          {
+            events: [
+              {
+                type: "Strawberry",
+                score: 25,
+                visible: true,
+              },
+            ],
+          },
+        ],
+      }),
+
       npc1: new Person({
         x: utils.withGrid(0),
         y: utils.withGrid(0),
