@@ -82,6 +82,21 @@ class Inventory {
             return `Herb : ${this.addToInventory("herb")}`;
           },
         },
+
+        //added by hs
+        {
+          label: "Tomato",
+          count: this.fetCounters("tomato"),
+          description: "Tomato",
+          handler: () => {
+            // this.counters.leeks += 1;
+            // //console.log(this.counters.leeks);
+            // localStorage.setItem("inventory", JSON.stringify(this.counters));
+            // console.log(localStorage.getItem("inventory"));
+            return `Tomato : ${this.addToInventory("tomato")}`;
+          },
+        },
+        
         // {
         //   label: (src = "/assets/images/food/wheat.png"),
         //   description: "Close the pause menu",
