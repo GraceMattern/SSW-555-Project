@@ -18,6 +18,7 @@
     apple: 0,
     leeks: 0,
     herb: 0, //added by sv
+    tomato: 0, //added by hs
   };
   localStorage.setItem("inventory", JSON.stringify(inventory));
 

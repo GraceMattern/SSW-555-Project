@@ -133,6 +133,24 @@ window.OverworldMaps = {
           },
         ],
       }),
+
+      tomato: new Person({
+        x: utils.withGrid(7),
+        y: utils.withGrid(4),
+        src: "/assets/images/food/tomato.png",
+        pick: [
+          {
+            events: [
+              {
+                type: "tomato",
+                score: 25,
+                visible: true,
+              },
+            ],
+          },
+        ],
+      }),
+
       npc1: new Person({
         x: utils.withGrid(0),
         y: utils.withGrid(0),
@@ -252,6 +270,11 @@ class Overworld {
       if (!this.map.isCutscenePlaying) {
         this.map.startCutscene([{ type: "pause" }]);
       }
+    });
+
+    new KeyPressListener("p", () => {
+      //Check one space away from current location for picking up object.
+      //Add object counter to inventory
     });
   }
 
