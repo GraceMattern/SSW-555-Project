@@ -170,7 +170,7 @@ window.OverworldMaps = {
 
       leek: new Person({
         x: utils.withGrid(5),
-        y: utils.withGrid(6),
+        y: utils.withGrid(10),
         src: "/assets/images/food/Leek.png",
         pick: [
           {
