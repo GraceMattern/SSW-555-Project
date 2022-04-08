@@ -96,7 +96,7 @@ class Inventory {
             return `Tomato : ${this.addToInventory("tomato")}`;
           },
         },
-        
+
         // {
         //   label: (src = "/assets/images/food/wheat.png"),
         //   description: "Close the pause menu",
@@ -135,7 +135,7 @@ class Inventory {
     container.appendChild(this.element);
 
     utils.wait(200);
-    this.esc = new KeyPressListener("Tab", () => {
+    this.esc = new KeyPressListener("CapsLock", () => {
       this.close();
     });
   }
