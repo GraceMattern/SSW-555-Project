@@ -120,7 +120,7 @@ window.OverworldMaps = {
       herb: new Person({
         x: utils.withGrid(4),
         y: utils.withGrid(4),
-        src: "/assets/images/food/sage.png",
+        src: "/assets/images/food/Sage.png",
         pick: [
           {
             events: [
@@ -137,7 +137,7 @@ window.OverworldMaps = {
       tomato: new Person({
         x: utils.withGrid(7),
         y: utils.withGrid(4),
-        src: "/assets/images/food/tomato.png",
+        src: "/assets/images/food/Tomato.png",
         pick: [
           {
             events: [
@@ -151,14 +151,65 @@ window.OverworldMaps = {
         ],
       }),
 
+      apple: new Person({
+        x: utils.withGrid(11),
+        y: utils.withGrid(7),
+        src: "/assets/images/food/Apple.png",
+        pick: [
+          {
+            events: [
+              {
+                type: "Apple",
+                score: 25,
+                visible: true,
+              },
+            ],
+          },
+        ],
+      }),
+
+      leek: new Person({
+        x: utils.withGrid(5),
+        y: utils.withGrid(10),
+        src: "/assets/images/food/Leek.png",
+        pick: [
+          {
+            events: [
+              {
+                type: "Leek",
+                score: 25,
+                visible: true,
+              },
+            ],
+          },
+        ],
+      }),
+
+      strawberry: new Person({
+        x: utils.withGrid(8),
+        y: utils.withGrid(9),
+        src: "/assets/images/food/Strawberry.png",
+        pick: [
+          {
+            events: [
+              {
+                type: "Strawberry",
+                score: 25,
+                visible: true,
+              },
+            ],
+          },
+        ],
+      }),
+
       npc1: new Person({
         x: utils.withGrid(0),
         y: utils.withGrid(0),
         src: "/assets/images/characters/sprite02.png",
-        // behaviorLoop: [
-        //   // { type: "stand", direction: "left", time: 800 },
-        //   // { type: "stand", direction: "right", time: 1200 },
-        // ],
+        behaviorLoop: [
+          { type: "stand", direction: "left", time: 800 },
+          { type: "stand", direction: "right", time: 1200 },
+        ],
         talking: [
           {
             events: [
@@ -201,6 +252,7 @@ window.OverworldMaps = {
       //     ],
       //   },
       // ],
+
     },
   },
 };

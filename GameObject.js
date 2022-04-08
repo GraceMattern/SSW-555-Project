@@ -53,9 +53,6 @@ class GameObject {
     this.doBehaviorEvent(map);
   }
 }
-
-// =======================================
-
 class Person extends GameObject {
   constructor(config) {
     super(config);
