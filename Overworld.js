@@ -120,7 +120,7 @@ window.OverworldMaps = {
       herb: new Person({
         x: utils.withGrid(4),
         y: utils.withGrid(4),
-        src: "/assets/images/food/sage.png",
+        src: "/assets/images/food/Sage.png",
         pick: [
           {
             events: [
@@ -137,7 +137,7 @@ window.OverworldMaps = {
       tomato: new Person({
         x: utils.withGrid(7),
         y: utils.withGrid(4),
-        src: "/assets/images/food/tomato.png",
+        src: "/assets/images/food/Tomato.png",
         pick: [
           {
             events: [
