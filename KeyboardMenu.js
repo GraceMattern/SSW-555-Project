@@ -7,21 +7,26 @@ class KeyboardMenu {
     this.descriptionContainer = config.descriptionContainer || null;
   }
 
-  setOptions(options) {
+  setOptions(options, shouldLoad) {
     this.options = options;
     this.element.innerHTML = this.options
       .map((option, index) => {
+        console.log(shouldLoad);
         const disabledAttr = option.disabled ? "disabled" : "";
         return `
           <div class="option">
-            <button ${disabledAttr} id="${
+            ${
+              shouldLoad && !option.type ? "<p " : "<button"
+            } ${disabledAttr} id="${
           option.label
         }" data-button="${index}" data-description="${option.description}">
               <span id="span-${option.label}">${option.label}  ${
           typeof option.count === "undefined" ? "" : `: ${option.count}`
         }</span>
-      
-            </button>
+
+        
+        
+        ${shouldLoad && !option.type ? "</p>" : "</button>"}
             <span class="right">${option.right ? option.right() : ""}</span>
           </div>
         `;

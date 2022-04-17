@@ -16,10 +16,13 @@
   inventory = {
     sage: 0,
     apple: 0,
-    Strawberry: 0, 
+    strawberry: 0,
     leeks: 0,
     herb: 0, //added by sv
     tomato: 0, //added by hs
+    herbalSachet: 0,
+    jam: 0,
+    fruitBowl: 0,
   };
   localStorage.setItem("inventory", JSON.stringify(inventory));
 
