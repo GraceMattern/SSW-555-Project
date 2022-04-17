@@ -12,7 +12,30 @@ class OverworldMap {
 
     this.isCutscenePlaying = false;
     this.isPaused = false;
+    this.difficultyNumber = function () {
+      return config.difficultyLevel === "easy"
+        ? 1
+        : config.difficultyLevel === "medium"
+        ? 2
+        : 3;
+      //this.difficultyLevel = config.difficultyLevel;
+    };
+    console.log(typeof this.difficultyLevel);
+    console.log(this.difficultyLevel);
   }
+
+  // difficultyNumber(difficultyLevel) {
+  //   switch (difficultyLevel) {
+  //     case "easy":
+  //       return 1;
+  //     case "medium":
+  //       return 2;
+  //     case "hard":
+  //       return 3;
+  //     default:
+  //       return 1;
+  //   }
+  // }
 
   drawLowerImage(ctx, cameraPerson) {
     ctx.drawImage(
@@ -107,9 +130,24 @@ class OverworldMap {
 
 window.OverworldMaps = {
   DemoRoom: {
+    // lowerSrc: "assets/images/maps/newmap.png",
+    //difficultyLevel: document.getElementById("levels").value,
     lowerSrc: "assets/images/maps/newmap.png",
+    // lowerSrc:
+    //   this.difficultyLevel === "easy"
+    //     ? "assets/images/maps/newmap.png"
+    //     : this.difficultyLevel === "medium"
+    //     ? "assets/images/maps/newmap.png"
+    //     : "assets/images/maps/newmap.png",
 
     // upperSrc: "", // TODO
+    // difficultyNumber: function () {
+    //   return config.difficultyLevel === "easy"
+    //     ? 1
+    //     : config.difficultyLevel === "medium"
+    //     ? 2
+    //     : 3;
+    // },
     gameObjects: {
       protag: new Person({
         isPlayerControlled: true,
@@ -118,8 +156,8 @@ window.OverworldMaps = {
       }),
 
       herb: new Person({
-        x: utils.withGrid(4),
-        y: utils.withGrid(4),
+        x: utils.withGrid(31),
+        y: utils.withGrid(14),
         src: "/assets/images/food/Sage.png",
         pick: [
           {
@@ -135,8 +173,8 @@ window.OverworldMaps = {
       }),
 
       tomato: new Person({
-        x: utils.withGrid(7),
-        y: utils.withGrid(4),
+        x: utils.withGrid(18),
+        y: utils.withGrid(12),
         src: "/assets/images/food/Tomato.png",
         pick: [
           {
@@ -152,8 +190,8 @@ window.OverworldMaps = {
       }),
 
       apple: new Person({
-        x: utils.withGrid(11),
-        y: utils.withGrid(7),
+        x: utils.withGrid(24),
+        y: utils.withGrid(12),
         src: "/assets/images/food/Apple.png",
         pick: [
           {
@@ -169,8 +207,8 @@ window.OverworldMaps = {
       }),
 
       leek: new Person({
-        x: utils.withGrid(5),
-        y: utils.withGrid(10),
+        x: utils.withGrid(13),
+        y: utils.withGrid(12),
         src: "/assets/images/food/Leek.png",
         pick: [
           {
@@ -186,8 +224,8 @@ window.OverworldMaps = {
       }),
 
       strawberry: new Person({
-        x: utils.withGrid(8),
-        y: utils.withGrid(9),
+        x: utils.withGrid(28),
+        y: utils.withGrid(17),
         src: "/assets/images/food/Strawberry.png",
         pick: [
           {
@@ -218,7 +256,19 @@ window.OverworldMaps = {
                 text: "Welcome to The Giving Garden",
                 faceHero: "npc1",
               },
-              { type: "textMessage", text: "Start by collecting some herbs!" },
+              { type: "textMessage", text: "The community needs our help." },
+              {
+                type: "textMessage",
+                text: `You must collect the ingredients to make the items were gifting.`,
+              },
+              {
+                type: "textMessage",
+                text: `Please make ${utils.difficultyNumber()} fruit bowl, ${utils.difficultyNumber()} herbal sachet, ${utils.difficultyNumber()} soup, ${utils.difficultyNumber()} apple pie and ${utils.difficultyNumber()} jam.`,
+              },
+              {
+                type: "textMessage",
+                text: "Talk to the young man above me for the recipe.",
+              },
             ],
           },
         ],
@@ -239,7 +289,26 @@ window.OverworldMaps = {
                 text: "Welcome to The Giving Garden",
                 faceHero: "npc2",
               },
-              { type: "textMessage", text: "Start by collecting some herbs!" },
+              {
+                type: "textMessage",
+                text: "Hey! In order to craft the gifts we are making, you need to first collect each item. Press Caps Locks to view your inventory.",
+              },
+              {
+                type: "textMessage",
+                text: "The first 5 items are the things you need to collect. The bottom five are the item we are gifting. Let me tell you the recipes.",
+              },
+              {
+                type: "textMessage",
+                text: "Fruit Bowls: apple and strawberry, Herbal Sachet: herb and leek, Soup: leek and tomato, Apple Pie: apple, Jam: apple and strawberry",
+              },
+              {
+                type: "textMessage",
+                text: "To craft each gift you need to have the required items in inventory and then press the gift in the inventory that you want to make.",
+              },
+              {
+                type: "textMessage",
+                text: "Come back to me if you forget the recipe.",
+              },
             ],
           },
         ],
@@ -383,6 +452,7 @@ class Overworld {
     // storing playername inside this.playerName
     this.playerName =
       config.playerName.length < 1 ? "DefaultName" : config.playerName;
+    //console.log(config.difficulty);
   }
 
   startGameLoop() {
@@ -455,6 +525,14 @@ class Overworld {
   }
 
   init() {
+    // if (config.difficulty === "easy") {
+    //   this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
+    // } else if (config.difficulty === "medium") {
+    //   this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
+    // } else {
+    //   this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
+    // }
+    //this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
     this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
     this.map.mountObjects();
 
@@ -477,7 +555,7 @@ class Overworld {
 
       {
         type: "textMessage",
-        text: "Start moving by pressing the arrow or WASD keys.",
+        text: "Start moving by pressing the arrow keys or WASD. Talk to Victoria right next to you for details!",
       },
     ]);
   }
