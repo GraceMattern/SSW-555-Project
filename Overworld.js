@@ -202,22 +202,6 @@ window.OverworldMaps = {
         ],
       }),
 
-      wheat: new Person({
-        x: utils.withGrid(11),
-        y: utils.withGrid(4),
-        src: "/assets/images/food/pie.png",
-        pick: [
-          {
-            events: [
-              {
-                type: "Wheat",
-                score: 25,
-                visible: true,
-              },
-            ],
-          },
-        ],
-      }),
 
       npc1: new Person({
         x: utils.withGrid(0),

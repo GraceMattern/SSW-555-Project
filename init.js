@@ -24,7 +24,8 @@
     herbalSachet: 0,
     jam: 0,
     fruitBowl: 0,
-    wreath: 0,
+    soup: 0,
+    applePie: 0,
   };
   localStorage.setItem("inventory", JSON.stringify(inventory));
 

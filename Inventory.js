@@ -103,23 +103,11 @@ class Inventory {
             return `Strawberry : ${this.addToInventory("strawberry")}`;
           },
         },
-        {
-          label: "Wheat",
-          count: this.fetCounters("wheat"),
-          description: "Wheat",
-          handler: () => {
-            // this.counters.leeks += 1;
-            // //console.log(this.counters.leeks);
-            // localStorage.setItem("inventory", JSON.stringify(this.counters));
-            // console.log(localStorage.getItem("inventory"));
-            return `Wheat : ${this.addToInventory("wheat")}`;
-          },
-        },
 
         // Craft Food
         {
           label: "Fruit Bowl",
-          type: "craftFood",
+          type: "craftDecoration",
           count: this.fetCounters("fruitBowl"),
           description: "Fruit Bowl",
           handler: () => {
@@ -128,7 +116,7 @@ class Inventory {
               this.removeFromInventory("apple");
               return `Fruit Bowl : ${this.addToInventory("fruitBowl")}`;
             }
-            alert(`Not sufficient Strawberry and Apple to craft food`);
+            alert(`Not sufficient Strawberry and Apple to craft decoration`);
             return `Fruit Bowl : ${this.fetCounters("fruitBowl")}`;
           },
         },
@@ -150,35 +138,51 @@ class Inventory {
 
         {
           label: "Herbal Sachet",
-          type: "craftFood",
+          type: "craftDecoration",
           count: this.fetCounters("herbalSachet"),
           description: "Herbal Sachet",
           handler: () => {
-            // this.fetCounters("herbal");
 
             if (this.fetCounters("herb") && this.fetCounters("tomato")) {
               this.removeFromInventory("herb");
               this.removeFromInventory("tomato");
               return `Herbal Sachet : ${this.addToInventory("herbalSachet")}`;
             }
-            alert(`Not sufficient Herbs and Tomatos to craft food`);
+            alert(`Not sufficient Herbs and Tomatos to craft decoration`);
             return `Herbal Sachet : ${this.fetCounters("herbalSachet")}`;
           },
         },
-        {
-          label: "Wreath",
-          type: "craftDecoration",
-          count: this.fetCounters("wreath"),
-          description: "Wreath",
-          handler: () => {
-            // this.fetCounters("herbal");
 
-            if (this.fetCounters("wheat")) {
-              this.removeFromInventory("wheat");
-              return `Wreath : ${this.addToInventory("wreath")}`;
+        {
+          label: "Soup",
+          type: "craftFood",
+          count: this.fetCounters("soup"),
+          description: "Soup",
+          handler: () => {
+
+            if (this.fetCounters("leek") && this.fetCounters("tomato")) {
+              this.removeFromInventory("leek");
+              this.removeFromInventory("tomato");
+              return `Soup : ${this.addToInventory("soup")}`;
             }
-            alert(`Not sufficient Wheat to craft decoration.`);
-            return `Wreath : ${this.fetCounters("wreath")}`;
+            alert(`Not sufficient Leek and Tomato to craft food`);
+            return `Soup : ${this.fetCounters("soup")}`;
+          },
+        },
+
+        {
+          label: "Apple Pie",
+          type: "craftFood",
+          count: this.fetCounters("applePie"),
+          description: "Apple Pie",
+          handler: () => {
+            
+            if (this.fetCounters("apple")) {
+              this.removeFromInventory("apple");
+              return `Soup : ${this.addToInventory("applePie")}`;
+            }
+            alert(`Not sufficient Apple to craft food`);
+            return `Apple Pie : ${this.fetCounters("applePie")}`;
           },
         },
       ];
