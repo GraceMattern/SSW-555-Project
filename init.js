@@ -19,10 +19,12 @@
     strawberry: 0,
     leeks: 0,
     herb: 0, //added by sv
+    wheat: 0,
     tomato: 0, //added by hs
     herbalSachet: 0,
     jam: 0,
     fruitBowl: 0,
+    wreath: 0,
   };
   localStorage.setItem("inventory", JSON.stringify(inventory));
 

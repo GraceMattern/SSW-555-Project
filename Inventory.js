@@ -103,6 +103,19 @@ class Inventory {
             return `Strawberry : ${this.addToInventory("strawberry")}`;
           },
         },
+        {
+          label: "Wheat",
+          count: this.fetCounters("wheat"),
+          description: "Wheat",
+          handler: () => {
+            // this.counters.leeks += 1;
+            // //console.log(this.counters.leeks);
+            // localStorage.setItem("inventory", JSON.stringify(this.counters));
+            // console.log(localStorage.getItem("inventory"));
+            return `Wheat : ${this.addToInventory("wheat")}`;
+          },
+        },
+
         // Craft Food
         {
           label: "Fruit Bowl",
@@ -150,6 +163,22 @@ class Inventory {
             }
             alert(`Not sufficient Herbs and Tomatos to craft food`);
             return `Herbal Sachet : ${this.fetCounters("herbalSachet")}`;
+          },
+        },
+        {
+          label: "Wreath",
+          type: "craftDecoration",
+          count: this.fetCounters("wreath"),
+          description: "Wreath",
+          handler: () => {
+            // this.fetCounters("herbal");
+
+            if (this.fetCounters("wheat")) {
+              this.removeFromInventory("wheat");
+              return `Wreath : ${this.addToInventory("wreath")}`;
+            }
+            alert(`Not sufficient Wheat to craft decoration.`);
+            return `Wreath : ${this.fetCounters("wreath")}`;
           },
         },
       ];
