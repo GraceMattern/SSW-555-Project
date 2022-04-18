@@ -79,6 +79,7 @@ class OverworldMap {
     if (!this.isCutscenePlaying && match && match.pick.length) {
       const addToInventory = new Inventory({ onComplete: () => resolve() });
       addToInventory.addToInventory(match.id);
+      utils.emitEvent("InventoryUpdated");
     }
   }
 
@@ -346,6 +347,10 @@ class Overworld {
   }
 
   init() {
+    //added by sv HUD
+    this.hud = new Hud();
+    this.hud.init(document.querySelector(".game-container"));
+
     this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
     this.map.mountObjects();
 
