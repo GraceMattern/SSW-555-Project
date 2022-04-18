@@ -126,11 +126,12 @@ class Inventory {
           count: this.fetCounters("jam"),
           description: "Jam",
           handler: () => {
-            if (this.fetCounters("strawberry")) {
+            if (this.fetCounters("strawberry") && this.fetCounters("apple")) {
               this.removeFromInventory("strawberry");
+              this.removeFromInventory("apple");
               return `Jam : ${this.addToInventory("jam")}`;
             }
-            alert(`Not sufficient Strawberry to craft food`);
+            alert(`Not sufficient Strawberry and Apple to craft food`);
             return `Jam : ${this.fetCounters("jam")}`;
           },
         },
@@ -141,8 +142,6 @@ class Inventory {
           count: this.fetCounters("herbalSachet"),
           description: "Herbal Sachet",
           handler: () => {
-            // this.fetCounters("herbal");
-
             if (this.fetCounters("herb") && this.fetCounters("tomato")) {
               this.removeFromInventory("herb");
               this.removeFromInventory("tomato");
@@ -150,6 +149,36 @@ class Inventory {
             }
             alert(`Not sufficient Herbs and Tomatos to craft food`);
             return `Herbal Sachet : ${this.fetCounters("herbalSachet")}`;
+          },
+        },
+
+        {
+          label: "soup",
+          type: "craftFood",
+          count: this.fetCounters("soup"),
+          description: "soup",
+          handler: () => {
+            if (this.fetCounters("tomato")) {
+              this.removeFromInventory("tomato");
+              return `soup : ${this.addToInventory("soup")}`;
+            }
+            alert(`Not sufficient tomato to craft food`);
+            return `soup : ${this.fetCounters("soup")}`;
+          },
+        },
+
+        {
+          label: "Applepie",
+          type: "craftFood",
+          count: this.fetCounters("Applepie"),
+          description: "Applepie",
+          handler: () => {
+            if (this.fetCounters("apple")) {
+              this.removeFromInventory("apple");
+              return `Applepie : ${this.addToInventory("Applepie")}`;
+            }
+            alert(`Not sufficient apple to craft food`);
+            return `Applepie : ${this.fetCounters("Applepie")}`;
           },
         },
       ];

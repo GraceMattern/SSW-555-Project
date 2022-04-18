@@ -22,7 +22,9 @@
     tomato: 0, //added by hs
     herbalSachet: 0,
     jam: 0,
+    soup: 0,
     fruitBowl: 0,
+    Applepie: 0,
   };
   localStorage.setItem("inventory", JSON.stringify(inventory));
 
