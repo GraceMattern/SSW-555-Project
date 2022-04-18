@@ -91,6 +91,7 @@ class Inventory {
             return `Tomato : ${this.addToInventory("tomato")}`;
           },
         },
+        
         {
           label: "Strawberry",
           count: this.fetCounters("strawberry"),
