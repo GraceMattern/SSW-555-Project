@@ -1,21 +1,9 @@
 class Inventory {
   constructor({ onComplete }) {
     this.onComplete = onComplete;
-    // this.counters = {
-    //   sage: 0,
-    //   apple: 0,
-    //   leeks: 0,
-    // };
   }
   fetCounters(word) {
-    //let inventory = this.counters;
-    //localStorage.setItem("inventory", inventory);
-    //debugger;
     let inventory = JSON.parse(localStorage.getItem("inventory"));
-    //console.log(inventory);
-    // if (!inventory) {
-    //   return this.counters[word];
-    // }
     return inventory[word];
   }
 
@@ -25,6 +13,13 @@ class Inventory {
     inventory[word] += 1;
     localStorage.setItem("inventory", JSON.stringify(inventory));
     return inventory[word];
+  }
+  removeFromInventory(word) {
+    //debugger;
+    let inventory = JSON.parse(localStorage.getItem("inventory"));
+    inventory[word] -= 1;
+    localStorage.setItem("inventory", JSON.stringify(inventory));
+    return true;
   }
 
   getOptions(pageKey) {
@@ -96,14 +91,67 @@ class Inventory {
             return `Tomato : ${this.addToInventory("tomato")}`;
           },
         },
-        
-        // {
-        //   label: (src = "/assets/images/food/wheat.png"),
-        //   description: "Close the pause menu",
-        //   handler: () => {
-        //     //this.close();
-        //   },
-        // },
+        {
+          label: "Strawberry",
+          count: this.fetCounters("strawberry"),
+          description: "Strawberry",
+          handler: () => {
+            // this.counters.leeks += 1;
+            // //console.log(this.counters.leeks);
+            // localStorage.setItem("inventory", JSON.stringify(this.counters));
+            // console.log(localStorage.getItem("inventory"));
+            return `Strawberry : ${this.addToInventory("strawberry")}`;
+          },
+        },
+        // Craft Food
+        {
+          label: "Fruit Bowl",
+          type: "craftFood",
+          count: this.fetCounters("fruitBowl"),
+          description: "Fruit Bowl",
+          handler: () => {
+            if (this.fetCounters("strawberry") && this.fetCounters("apple")) {
+              this.removeFromInventory("strawberry");
+              this.removeFromInventory("apple");
+              return `Fruit Bowl : ${this.addToInventory("fruitBowl")}`;
+            }
+            alert(`Not sufficient Strawberry and Apple to craft food`);
+            return `Fruit Bowl : ${this.fetCounters("fruitBowl")}`;
+          },
+        },
+
+        {
+          label: "Jam",
+          type: "craftFood",
+          count: this.fetCounters("jam"),
+          description: "Jam",
+          handler: () => {
+            if (this.fetCounters("strawberry")) {
+              this.removeFromInventory("strawberry");
+              return `Jam : ${this.addToInventory("jam")}`;
+            }
+            alert(`Not sufficient Strawberry to craft food`);
+            return `Jam : ${this.fetCounters("jam")}`;
+          },
+        },
+
+        {
+          label: "Herbal Sachet",
+          type: "craftFood",
+          count: this.fetCounters("herbalSachet"),
+          description: "Herbal Sachet",
+          handler: () => {
+            // this.fetCounters("herbal");
+
+            if (this.fetCounters("herb") && this.fetCounters("tomato")) {
+              this.removeFromInventory("herb");
+              this.removeFromInventory("tomato");
+              return `Herbal Sachet : ${this.addToInventory("herbalSachet")}`;
+            }
+            alert(`Not sufficient Herbs and Tomatos to craft food`);
+            return `Herbal Sachet : ${this.fetCounters("herbalSachet")}`;
+          },
+        },
       ];
     }
   }
@@ -129,12 +177,13 @@ class Inventory {
       descriptionContainer: container,
     });
     this.keyboardMenu.init(this.element);
-    this.keyboardMenu.setOptions(this.getOptions("root"));
+    this.keyboardMenu.setOptions(this.getOptions("root"), true);
+    // this.keyboardMenu.setInventoryOptions(this.getOptions("root"));
 
     container.appendChild(this.element);
 
     utils.wait(200);
-    this.esc = new KeyPressListener("Tab", () => {
+    this.esc = new KeyPressListener("CapsLock", () => {
       this.close();
     });
   }
