@@ -16,7 +16,7 @@
   inventory = {
     sage: 0,
     apple: 0,
-    Strawberry: 0, 
+    strawberry: 0,
     leeks: 0,
     herb: 0, //added by sv
     tomato: 0, //added by hs
@@ -25,7 +25,7 @@
 
   btn.addEventListener("click", () => {
     btn.hidden = true;
-    var difficultyLevel = document.getElementById("levels").value;
+    let difficultyLevel = document.getElementById("levels").value;
     const overworld = new Overworld({
       element: document.querySelector(".game-container"),
       playerName: prompt("Enter the name of the player."),

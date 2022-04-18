@@ -94,7 +94,6 @@ class OverworldMap {
 
   //added by sv
   checkForPick() {
-    let pick;
     const hero = this.gameObjects["protag"];
     const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
     const match = Object.values(this.gameObjects).find((object) => {
@@ -103,6 +102,7 @@ class OverworldMap {
     if (!this.isCutscenePlaying && match && match.pick.length) {
       const addToInventory = new Inventory({ onComplete: () => resolve() });
       addToInventory.addToInventory(match.id);
+      utils.emitEvent("InventoryUpdated");
     }
   }
 
@@ -464,20 +464,28 @@ class Overworld {
       const cameraPerson = this.map.gameObjects.protag;
 
       //Update all objects
-      Object.values(this.map.gameObjects).forEach((object) => {
-        object.update({
-          arrow: this.directionInput.direction,
-          map: this.map,
+      Object.values(this.map.gameObjects)
+        .sort((a, b) => {
+          a.y - b.y;
+        })
+        .forEach((object) => {
+          object.update({
+            arrow: this.directionInput.direction,
+            map: this.map,
+          });
         });
-      });
 
       // draw lower
       this.map.drawLowerImage(this.ctx, cameraPerson);
 
       //Draw Game Objects
-      Object.values(this.map.gameObjects).forEach((object) => {
-        object.sprite.draw(this.ctx, cameraPerson);
-      });
+      Object.values(this.map.gameObjects)
+        .sort((a, b) => {
+          a.y - b.y;
+        })
+        .forEach((object) => {
+          object.sprite.draw(this.ctx, cameraPerson);
+        });
 
       // TODO upper
       // this.map.drawUpperImage(this.ctx, cameraPerson);
@@ -525,20 +533,15 @@ class Overworld {
   }
 
   init() {
-    // if (config.difficulty === "easy") {
-    //   this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
-    // } else if (config.difficulty === "medium") {
-    //   this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
-    // } else {
-    //   this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
-    // }
-    //this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
+    //added by sv HUD
+    this.hud = new Hud();
+    this.hud.init(document.querySelector(".game-container"));
+
     this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
     this.map.mountObjects();
 
     this.bindActionInput();
     this.bindHeroPositionCheck();
-    console.log(this.map.pick);
 
     this.directionInput = new DirectionInput();
     this.directionInput.init();
