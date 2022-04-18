@@ -52,3 +52,26 @@ body {
 .start-btn:hover {
   background: lightsalmon;
 }
+
+/* added by sv HUD*/
+.Hud {
+  position: absolute;
+  left: 2px;
+  top: 10px;
+  image-rendering: pixelated;
+  background: rgb(94, 126, 106);
+  color: #000;
+  border: 3px solid rgb(65, 114, 65);
+  z-index: 2;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-bottom: 4px;
+  font-size: xx-small;
+}
+
+.header-img {
+  height: 10px;
+}
+.craft-item {
+  height: 10px;
+}

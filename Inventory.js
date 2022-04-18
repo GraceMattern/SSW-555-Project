@@ -8,7 +8,6 @@ class Inventory {
   }
 
   addToInventory(word) {
-    //debugger;
     let inventory = JSON.parse(localStorage.getItem("inventory"));
     inventory[word] += 1;
     localStorage.setItem("inventory", JSON.stringify(inventory));
@@ -92,6 +91,7 @@ class Inventory {
           },
         },
         
+        //added by sv - strawberry
         {
           label: "Strawberry",
           count: this.fetCounters("strawberry"),
@@ -105,7 +105,7 @@ class Inventory {
           },
         },
 
-        // Craft Food
+        // Craft Food & Decoration
         {
           label: "Fruit Bowl",
           type: "craftDecoration",
@@ -186,6 +186,13 @@ class Inventory {
             return `Apple Pie : ${this.fetCounters("applePie")}`;
           },
         },
+        // {
+        //   label: (src = "/assets/images/food/wheat.png"),
+        //   description: "Close the pause menu",
+        //   handler: () => {
+        //     //this.close();
+        //   },
+        // },
       ];
     }
   }
@@ -219,6 +226,80 @@ class Inventory {
     utils.wait(200);
     this.esc = new KeyPressListener("CapsLock", () => {
       this.close();
+    });
+  }
+}
+
+//added by sv HUD
+class Hud {
+  constructor() {}
+  createElement() {
+    this.element = document.createElement("div");
+    this.element.classList.add("Hud");
+    const inventory = JSON.parse(localStorage.getItem("inventory"));
+
+    this.update();
+  }
+  update() {
+    console.log("updateFired");
+    const inventory = JSON.parse(localStorage.getItem("inventory"));
+    const difficultyLevel = document.getElementById("levels").value;
+
+    if (difficultyLevel === "easy") {
+      //check if the goal is met or in progress
+      this.element.innerHTML = `
+      <div class="progressSoFar">
+        <table>
+            <tbody>
+            <tr>
+            <td><img class="header-img" src="/assets/images/food/thumbnails/Fruit_bowl-thumb.png"/></td>
+            <td><img class="craft-item" src="/assets/images/food/thumbnails/apple-thumb.png" alt="apple" /></td>
+            <td>${inventory.apple}</td>
+            <td><img class="craft-item" src="/assets/images/food//thumbnails/Strawberry-thumb.png" alt="strawberry" /> </td>
+            <td>${inventory.strawberry}</td>
+            </tr>
+            <tr>
+            <td><img class="header-img" src="/assets/images/food/thumbnails/Herbal_sachet-thumb.png"/></td>
+            <td><img class="craft-item" src="/assets/images/food/thumbnails/Leek-thumb.png" alt="apple" /></td>
+            <td>${inventory.leeks}</td>
+            <td><img class="craft-item" src="/assets/images/food//thumbnails/sage-thumb.png" alt="strawberry" /> </td>
+            <td>${inventory.herb}</td>
+            </tr>
+            <tr>
+            <td><img class="header-img" src="/assets/images/food/thumbnails/Soup-thumb.png"/></td>
+            <td><img class="craft-item" src="/assets/images/food/thumbnails/Tomato-thumb.png" alt="apple" /></td>
+            <td>${inventory.tomato}</td>
+            <td><img class="craft-item" src="/assets/images/food//thumbnails/Leek-thumb.png" alt="strawberry" /> </td>
+            <td>${inventory.leeks}</td>
+            </tr>
+            <tr>
+            <td><img class="header-img" src="/assets/images/food/thumbnails/Pie-thumb.png"/></td>
+            <td><img class="craft-item" src="/assets/images/food/thumbnails/apple-thumb.png" alt="apple" /></td>
+            <td>${inventory.apple}</td>
+            <td></td>
+            <td></td>
+            </tr>
+            <tr>
+            <td><img class="header-img" src="/assets/images/food/thumbnails/Jam-thumb.png"/></td>
+            <td><img class="craft-item" src="/assets/images/food/thumbnails/apple-thumb.png" alt="apple" /></td>
+            <td>${inventory.apple}</td>
+            <td><img class="craft-item" src="/assets/images/food//thumbnails/Strawberry-thumb.png" alt="strawberry" /> </td>
+            <td>${inventory.strawberry}</td>
+            </tr>
+            </tbody>
+          </table>
+    `;
+    } else if (difficultyLevel === "medium") {
+    } else {
+    }
+  }
+
+  init(container) {
+    this.createElement();
+    container.appendChild(this.element);
+
+    document.addEventListener("InventoryUpdated", () => {
+      this.update();
     });
   }
 }
