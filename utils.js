@@ -48,12 +48,4 @@ const utils = {
       }, ms);
     });
   },
-  difficultyLevel: document.getElementById("levels").value,
-  difficultyNumber: function () {
-    return this.difficultyLevel === "easy"
-      ? 1
-      : this.difficultyLevel === "medium"
-      ? 2
-      : 3;
-  },
 };

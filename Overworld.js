@@ -263,7 +263,7 @@ window.OverworldMaps = {
               },
               {
                 type: "textMessage",
-                text: `Please make ${utils.difficultyNumber()} fruit bowl, ${utils.difficultyNumber()} herbal sachet, ${utils.difficultyNumber()} soup, ${utils.difficultyNumber()} apple pie and ${utils.difficultyNumber()} jam.`,
+                text: `Please make fruit bowl, herbal sachet, soup, apple pie and jam.`,
               },
               {
                 type: "textMessage",
@@ -286,16 +286,12 @@ window.OverworldMaps = {
             events: [
               {
                 type: "textMessage",
-                text: "Welcome to The Giving Garden",
+                text: "Hey! In order to craft the gifts we are making, you need to first collect each item. Press Caps Locks to view your inventory.",
                 faceHero: "npc2",
               },
               {
                 type: "textMessage",
-                text: "Hey! In order to craft the gifts we are making, you need to first collect each item. Press Caps Locks to view your inventory.",
-              },
-              {
-                type: "textMessage",
-                text: "The first 5 items are the things you need to collect. The bottom five are the item we are gifting. Let me tell you the recipes.",
+                text: "Let me tell you the recipes.",
               },
               {
                 type: "textMessage",
@@ -308,6 +304,10 @@ window.OverworldMaps = {
               {
                 type: "textMessage",
                 text: "Come back to me if you forget the recipe.",
+              },
+              {
+                type: "textMessage",
+                text: "Your current progress is shown to the left menu on the screen.",
               },
             ],
           },
