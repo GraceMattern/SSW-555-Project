@@ -26,7 +26,7 @@ class PauseMenu {
           label: "Quit",
           description: "Quit",
           handler: () => {
-            self.close();
+            window.close();
           },
         },
         {

@@ -7,21 +7,29 @@ class KeyboardMenu {
     this.descriptionContainer = config.descriptionContainer || null;
   }
 
-  setOptions(options) {
+  setOptions(options, shouldLoad) {
     this.options = options;
     this.element.innerHTML = this.options
       .map((option, index) => {
+        console.log(shouldLoad);
         const disabledAttr = option.disabled ? "disabled" : "";
         return `
           <div class="option">
-            <button ${disabledAttr} id="${
-          option.label
-        }" data-button="${index}" data-description="${option.description}">
+            ${
+              ((shouldLoad && option.type) || true)
+                ? `  <button ${disabledAttr} id="${
+                    option.label
+                  }" data-button="${index}" data-description="${
+                    option.description
+                  }">
               <span id="span-${option.label}">${option.label}  ${
-          typeof option.count === "undefined" ? "" : `: ${option.count}`
-        }</span>
-      
-            </button>
+                    typeof option.count === "undefined"
+                      ? ""
+                      : `: ${option.count}`
+                  }</span>
+        </button>`
+                : ""
+            }
             <span class="right">${option.right ? option.right() : ""}</span>
           </div>
         `;
@@ -49,6 +57,49 @@ class KeyboardMenu {
       this.element.querySelector("button[data-button]:not([disabled])").focus();
     }, 10);
   }
+
+  // setInventoryOptions(options) {
+  //   this.options = options;
+  //   this.element.innerHTML = this.options
+  //     .map((option, index) => {
+  //       const disabledAttr = option.disabled ? "disabled" : "";
+  //       return `
+  //         <div class="option">
+  //           <strong ${disabledAttr} id="${
+  //         option.label
+  //       }" data-button="${index}" data-description="${option.description}">
+  //             <span id="span-${option.label}">${option.label}  ${
+  //         typeof option.count === "undefined" ? "" : `: ${option.count}`
+  //       }</span>
+
+  //           </strong>
+  //           <span class="right">${option.right ? option.right() : ""}</span>
+  //         </div>
+  //       `;
+  //     })
+  //     .join("");
+
+  //   // this.element.querySelectorAll("button").forEach((button) => {
+  //   //   button.addEventListener("click", (evt) => {
+  //   //     const chosenOption = this.options[Number(button.dataset.button)];
+  //   //     const newCounter = chosenOption.handler();
+  //   //     // (fetCounters(evt.target.id))
+  //   //     console.log(document.getElementById(evt.target.id));
+  //   //     document.getElementById(evt.target.id).textContent = newCounter;
+  //   //   });
+  //   //   button.addEventListener("mouseenter", () => {
+  //   //     button.focus();
+  //   //   });
+  //   //   button.addEventListener("focus", () => {
+  //   //     this.prevFocus = button;
+  //   //     this.descriptionElementText.innerText = button.dataset.description;
+  //   //   });
+  //   // });
+
+  //   setTimeout(() => {
+  //     this.element.querySelector("button[data-button]:not([disabled])").focus();
+  //   }, 10);
+  // }
 
   createElement() {
     this.element = document.createElement("div");
