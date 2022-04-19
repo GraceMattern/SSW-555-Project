@@ -23,12 +23,14 @@
     herbalSachet: 0,
     jam: 0,
     fruitBowl: 0,
+    soup: 0,
+    pie: 0,
   };
   localStorage.setItem("inventory", JSON.stringify(inventory));
 
   btn.addEventListener("click", () => {
     btn.hidden = true;
-    var difficultyLevel = document.getElementById("levels").value;
+    let difficultyLevel = document.getElementById("levels").value;
     const overworld = new Overworld({
       element: document.querySelector(".game-container"),
       playerName: prompt("Enter the name of the player."),

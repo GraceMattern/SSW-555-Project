@@ -48,4 +48,55 @@ const utils = {
       }, ms);
     });
   },
+
+  inventoryHTML(inventory) {
+    return `
+    <div class="progressSoFar">
+      <table>
+          <tbody>
+          <tr>
+          <td><img class="header-img" src="/assets/images/food/thumbnails/Fruit_bowl-thumb.png"/></td>
+          <td><span id="fruitBowlContainer">${inventory.fruitBowl}</span></td>
+
+          <td><img class="craft-item" src="/assets/images/food/thumbnails/apple-thumb.png" alt="apple" /></td>
+          <td>${inventory.apple}</td>
+          <td><img class="craft-item" src="/assets/images/food//thumbnails/Strawberry-thumb.png" alt="strawberry" /> </td>
+          <td>${inventory.strawberry}</td>
+          </tr>
+          <tr>
+          <td><img class="header-img" src="/assets/images/food/thumbnails/Herbal_sachet-thumb.png"/></td>
+          <td><span id="herbalSachetContainer">${inventory.herbalSachet}</span></td>
+          <td><img class="craft-item" src="/assets/images/food/thumbnails/Leek-thumb.png" alt="apple" /></td>
+          <td>${inventory.leeks}</td>
+          <td><img class="craft-item" src="/assets/images/food//thumbnails/sage-thumb.png" alt="strawberry" /> </td>
+          <td>${inventory.herb}</td>
+          </tr>
+          <tr>
+          <td><img class="header-img" src="/assets/images/food/thumbnails/Soup-thumb.png"/></td>
+          <td><span id="souptContainer">${inventory.soup}</span></td>
+          <td><img class="craft-item" src="/assets/images/food/thumbnails/Tomato-thumb.png" alt="apple" /></td>
+          <td>${inventory.tomato}</td>
+          <td><img class="craft-item" src="/assets/images/food//thumbnails/Leek-thumb.png" alt="strawberry" /> </td>
+          <td>${inventory.leeks}</td>
+          </tr>
+          <tr>
+          <td><img class="header-img" src="/assets/images/food/thumbnails/Pie-thumb.png"/></td>
+          <td><span id="pieContainer">${inventory.pie}</span></td>
+          <td><img class="craft-item" src="/assets/images/food/thumbnails/apple-thumb.png" alt="apple" /></td>
+          <td>${inventory.apple}</td>
+          <td></td>
+          <td></td>
+          </tr>
+          <tr>
+          <td><img class="header-img" src="/assets/images/food/thumbnails/Jam-thumb.png"/></td>
+          <td><span id="jamContainer">${inventory.jam}</span></td>
+          <td><img class="craft-item" src="/assets/images/food/thumbnails/apple-thumb.png" alt="apple" /></td>
+          <td>${inventory.apple}</td>
+          <td><img class="craft-item" src="/assets/images/food//thumbnails/Strawberry-thumb.png" alt="strawberry" /> </td>
+          <td>${inventory.strawberry}</td>
+          </tr>
+          </tbody>
+        </table>
+  `;
+  },
 };

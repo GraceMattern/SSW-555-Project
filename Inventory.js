@@ -8,7 +8,6 @@ class Inventory {
   }
 
   addToInventory(word) {
-    //debugger;
     let inventory = JSON.parse(localStorage.getItem("inventory"));
     inventory[word] += 1;
     localStorage.setItem("inventory", JSON.stringify(inventory));
@@ -32,12 +31,7 @@ class Inventory {
           count: this.fetCounters("sage"),
           description: "Sage",
           handler: () => {
-            //this.counters.sage += 1;
-            //localStorage.setItem("inventory", JSON.stringify(this.counters));
-            //console.log(this.counters.sage);
             return `Sage : ${this.addToInventory("sage")}`;
-            // window.location.reload(true);
-            // We'll come back to this...
           },
         },
         {
@@ -45,10 +39,6 @@ class Inventory {
           count: this.fetCounters("apple"),
           description: "Apple",
           handler: () => {
-            // this.counters.apple += 1;
-            // localStorage.setItem("inventory", JSON.stringify(this.counters));
-
-            // console.log(this.counters.apple);
             return `Apple : ${this.addToInventory("apple")}`;
           },
         },
@@ -57,10 +47,6 @@ class Inventory {
           count: this.fetCounters("leeks"),
           description: "Leek",
           handler: () => {
-            // this.counters.leeks += 1;
-            // //console.log(this.counters.leeks);
-            // localStorage.setItem("inventory", JSON.stringify(this.counters));
-            // console.log(localStorage.getItem("inventory"));
             return `Leek : ${this.addToInventory("leeks")}`;
           },
         },
@@ -70,10 +56,6 @@ class Inventory {
           count: this.fetCounters("herb"),
           description: "Herb",
           handler: () => {
-            // this.counters.leeks += 1;
-            // //console.log(this.counters.leeks);
-            // localStorage.setItem("inventory", JSON.stringify(this.counters));
-            // console.log(localStorage.getItem("inventory"));
             return `Herb : ${this.addToInventory("herb")}`;
           },
         },
@@ -84,22 +66,15 @@ class Inventory {
           count: this.fetCounters("tomato"),
           description: "Tomato",
           handler: () => {
-            // this.counters.leeks += 1;
-            // //console.log(this.counters.leeks);
-            // localStorage.setItem("inventory", JSON.stringify(this.counters));
-            // console.log(localStorage.getItem("inventory"));
             return `Tomato : ${this.addToInventory("tomato")}`;
           },
         },
+        //added by sv - strawberry
         {
           label: "Strawberry",
           count: this.fetCounters("strawberry"),
           description: "Strawberry",
           handler: () => {
-            // this.counters.leeks += 1;
-            // //console.log(this.counters.leeks);
-            // localStorage.setItem("inventory", JSON.stringify(this.counters));
-            // console.log(localStorage.getItem("inventory"));
             return `Strawberry : ${this.addToInventory("strawberry")}`;
           },
         },
@@ -110,13 +85,18 @@ class Inventory {
           count: this.fetCounters("fruitBowl"),
           description: "Fruit Bowl",
           handler: () => {
+            const currentBowl = this.fetCounters("fruitBowl");
             if (this.fetCounters("strawberry") && this.fetCounters("apple")) {
               this.removeFromInventory("strawberry");
               this.removeFromInventory("apple");
-              return `Fruit Bowl : ${this.addToInventory("fruitBowl")}`;
+              const updatedCount = this.addToInventory("fruitBowl");
+              document.getElementById("fruitBowlContainer").innerHTML =
+                updatedCount;
+              utils.emitEvent("InventoryUpdated");
+              return `Fruit Bowl : ${updatedCount}`;
             }
             alert(`Not sufficient Strawberry and Apple to craft food`);
-            return `Fruit Bowl : ${this.fetCounters("fruitBowl")}`;
+            return `Fruit Bowl : ${currentBowl}`;
           },
         },
 
@@ -126,12 +106,18 @@ class Inventory {
           count: this.fetCounters("jam"),
           description: "Jam",
           handler: () => {
-            if (this.fetCounters("strawberry")) {
+            const currentCount = this.fetCounters("jam");
+            if (this.fetCounters("strawberry") && this.fetCounters("apple")) {
               this.removeFromInventory("strawberry");
-              return `Jam : ${this.addToInventory("jam")}`;
+              this.removeFromInventory("apple");
+
+              const updatedCount = this.addToInventory("jam");
+              document.getElementById("jamContainer").innerHTML = updatedCount;
+              utils.emitEvent("InventoryUpdated");
+              return `Jam : ${updatedCount}`;
             }
             alert(`Not sufficient Strawberry to craft food`);
-            return `Jam : ${this.fetCounters("jam")}`;
+            return `Jam : ${currentCount}`;
           },
         },
 
@@ -141,15 +127,61 @@ class Inventory {
           count: this.fetCounters("herbalSachet"),
           description: "Herbal Sachet",
           handler: () => {
-            // this.fetCounters("herbal");
-
-            if (this.fetCounters("herb") && this.fetCounters("tomato")) {
+            const currentCount = this.fetCounters("herbalSachet");
+            if (this.fetCounters("herb") && this.fetCounters("leeks")) {
               this.removeFromInventory("herb");
-              this.removeFromInventory("tomato");
-              return `Herbal Sachet : ${this.addToInventory("herbalSachet")}`;
+              this.removeFromInventory("leeks");
+
+              const updatedCount = this.addToInventory("herbalSachet");
+              document.getElementById("herbalSachetContainer").innerHTML =
+                updatedCount;
+              utils.emitEvent("InventoryUpdated");
+
+              return `Herbal Sachet : ${updatedCount}`;
             }
-            alert(`Not sufficient Herbs and Tomatos to craft food`);
-            return `Herbal Sachet : ${this.fetCounters("herbalSachet")}`;
+            alert(`Not sufficient Herbs and Leeks to craft food`);
+            return `Herbal Sachet : ${currentCount}`;
+          },
+        },
+
+        {
+          label: "Soup",
+          type: "craftFood",
+          count: this.fetCounters("soup"),
+          description: "Soup",
+          handler: () => {
+            const currentCount = this.fetCounters("soup");
+            if (this.fetCounters("tomato") && this.fetCounters("leeks")) {
+              this.removeFromInventory("tomato");
+              this.removeFromInventory("leeks");
+
+              const updatedCount = this.addToInventory("soup");
+              document.getElementById("soupContainer").innerHTML = updatedCount;
+              utils.emitEvent("InventoryUpdated");
+
+              return `Soup : ${updatedCount}`;
+            }
+            alert(`Not sufficient Tomatos and Leeks to craft food`);
+            return `Soup : ${currentCount}`;
+          },
+        },
+
+        {
+          label: "Pie",
+          type: "craftFood",
+          count: this.fetCounters("pie"),
+          description: "Pie",
+          handler: () => {
+            const currentCount = this.fetCounters("pie");
+            if (this.fetCounters("apple")) {
+              this.removeFromInventory("apple");
+              const updatedCount = this.addToInventory("pie");
+              document.getElementById("pieContainer").innerHTML = updatedCount;
+              utils.emitEvent("InventoryUpdated");
+              return `Pie : ${updatedCount}`;
+            }
+            alert(`Not sufficient Apples to craft food`);
+            return `Pie : ${currentCount}`;
           },
         },
       ];
@@ -185,6 +217,39 @@ class Inventory {
     utils.wait(200);
     this.esc = new KeyPressListener("CapsLock", () => {
       this.close();
+    });
+  }
+}
+
+//added by sv HUD
+class Hud {
+  constructor() {}
+  createElement() {
+    this.element = document.createElement("div");
+    this.element.classList.add("Hud");
+    const inventory = JSON.parse(localStorage.getItem("inventory"));
+
+    this.update();
+  }
+  update() {
+    console.log("updateFired");
+    const inventory = JSON.parse(localStorage.getItem("inventory"));
+    const difficultyLevel = document.getElementById("levels").value;
+
+    if (difficultyLevel === "easy") {
+      //check if the goal is met or in progress
+      this.element.innerHTML = utils.inventoryHTML(inventory);
+    } else if (difficultyLevel === "medium") {
+    } else {
+    }
+  }
+
+  init(container) {
+    this.createElement();
+    container.appendChild(this.element);
+
+    document.addEventListener("InventoryUpdated", () => {
+      this.update();
     });
   }
 }

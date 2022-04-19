@@ -16,17 +16,20 @@ class KeyboardMenu {
         return `
           <div class="option">
             ${
-              shouldLoad && !option.type ? "<p " : "<button"
-            } ${disabledAttr} id="${
-          option.label
-        }" data-button="${index}" data-description="${option.description}">
+              shouldLoad && option.type
+                ? `  <button ${disabledAttr} id="${
+                    option.label
+                  }" data-button="${index}" data-description="${
+                    option.description
+                  }">
               <span id="span-${option.label}">${option.label}  ${
-          typeof option.count === "undefined" ? "" : `: ${option.count}`
-        }</span>
-
-        
-        
-        ${shouldLoad && !option.type ? "</p>" : "</button>"}
+                    typeof option.count === "undefined"
+                      ? ""
+                      : `: ${option.count}`
+                  }</span>
+        </button>`
+                : ""
+            }
             <span class="right">${option.right ? option.right() : ""}</span>
           </div>
         `;
