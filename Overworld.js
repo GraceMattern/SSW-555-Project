@@ -225,12 +225,12 @@ window.OverworldMaps = {
       }),
     },
     walls: {
+      [utils.asGridCoord(9, 8)]: true,
       [utils.asGridCoord(9, 9)]: true,
       [utils.asGridCoord(9, 10)]: true,
       [utils.asGridCoord(9, 11)]: true,
       [utils.asGridCoord(9, 12)]: true,
       [utils.asGridCoord(9, 13)]: true,
-      [utils.asGridCoord(9, 8)]: true,
       [utils.asGridCoord(10, 8)]: true,
       [utils.asGridCoord(11, 8)]: true,
       [utils.asGridCoord(12, 8)]: true,
@@ -318,7 +318,14 @@ class Overworld {
       this.map.checkForPick();
     });
 
-    new KeyPressListener("Tab", () => {
+    // new KeyPressListener("Tab", () => {
+    //   //Is there a person here to talk to?
+    //   if (!this.map.isCutscenePlaying) {
+    //     this.map.startCutscene([{ type: "inventory" }]);
+    //   }
+    // });
+
+    new KeyPressListener("CapsLock", () => {
       //Is there a person here to talk to?
       if (!this.map.isCutscenePlaying) {
         this.map.startCutscene([{ type: "inventory" }]);

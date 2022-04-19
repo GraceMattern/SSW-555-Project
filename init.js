@@ -20,6 +20,11 @@
     leeks: 0,
     herb: 0, //added by sv
     tomato: 0, //added by hs
+    herbalSachet: 0,
+    jam: 0,
+    fruitBowl: 0,
+    soup: 0,
+    pie: 0,
   };
   localStorage.setItem("inventory", JSON.stringify(inventory));
 
