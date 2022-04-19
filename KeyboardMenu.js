@@ -16,7 +16,7 @@ class KeyboardMenu {
         return `
           <div class="option">
             ${
-              shouldLoad && option.type
+              ((shouldLoad && option.type) || true)
                 ? `  <button ${disabledAttr} id="${
                     option.label
                   }" data-button="${index}" data-description="${
