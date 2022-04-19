@@ -17,7 +17,7 @@
     sage: 0,
     apple: 0,
     strawberry: 0,
-    leeks: 0,
+    leek: 0,
     herb: 0, //added by sv
     tomato: 0, //added by hs
     herbalSachet: 0,

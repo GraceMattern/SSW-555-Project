@@ -295,7 +295,7 @@ window.OverworldMaps = {
               },
               {
                 type: "textMessage",
-                text: "Fruit Bowls: apple and strawberry, Herbal Sachet: herb and leek, Soup: leek and tomato, Apple Pie: apple, Jam: apple and strawberry",
+                text: "Fruit Bowls: apple and strawberry, Herbal Sachet: herb, Soup: leek and tomato, Apple Pie: apple, Jam: strawberry",
               },
               {
                 type: "textMessage",

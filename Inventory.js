@@ -95,7 +95,7 @@ class Inventory {
               utils.emitEvent("InventoryUpdated");
               return `Fruit Bowl : ${updatedCount}`;
             }
-            alert(`Not sufficient Strawberry and Apple to craft food`);
+            alert(`Not sufficient Strawberry to craft item`);
             return `Fruit Bowl : ${currentBowl}`;
           },
         },
@@ -107,9 +107,8 @@ class Inventory {
           description: "Jam",
           handler: () => {
             const currentCount = this.fetCounters("jam");
-            if (this.fetCounters("strawberry") && this.fetCounters("apple")) {
+            if (this.fetCounters("strawberry")) {
               this.removeFromInventory("strawberry");
-              this.removeFromInventory("apple");
 
               const updatedCount = this.addToInventory("jam");
               document.getElementById("jamContainer").innerHTML = updatedCount;
@@ -128,9 +127,8 @@ class Inventory {
           description: "Herbal Sachet",
           handler: () => {
             const currentCount = this.fetCounters("herbalSachet");
-            if (this.fetCounters("herb") && this.fetCounters("leeks")) {
+            if (this.fetCounters("herb")) {
               this.removeFromInventory("herb");
-              this.removeFromInventory("leeks");
 
               const updatedCount = this.addToInventory("herbalSachet");
               document.getElementById("herbalSachetContainer").innerHTML =
@@ -139,7 +137,7 @@ class Inventory {
 
               return `Herbal Sachet : ${updatedCount}`;
             }
-            alert(`Not sufficient Herbs and Leeks to craft food`);
+            alert(`Not sufficient Herbs to craft food`);
             return `Herbal Sachet : ${currentCount}`;
           },
         },
@@ -151,9 +149,9 @@ class Inventory {
           description: "Soup",
           handler: () => {
             const currentCount = this.fetCounters("soup");
-            if (this.fetCounters("tomato") && this.fetCounters("leeks")) {
+            if (this.fetCounters("tomato") && this.fetCounters("leek")) {
               this.removeFromInventory("tomato");
-              this.removeFromInventory("leeks");
+              this.removeFromInventory("leek");
 
               const updatedCount = this.addToInventory("soup");
               document.getElementById("soupContainer").innerHTML = updatedCount;
@@ -161,7 +159,7 @@ class Inventory {
 
               return `Soup : ${updatedCount}`;
             }
-            alert(`Not sufficient Tomatos and Leeks to craft food`);
+            alert(`Not sufficient Tomatoes ${this.fetCounters("soup")} and Leeks to craft food`);
             return `Soup : ${currentCount}`;
           },
         },
@@ -192,7 +190,7 @@ class Inventory {
     this.element = document.createElement("div");
     this.element.classList.add("Inventory");
     this.element.innerHTML = `
-      <h2>Inventory</h2>
+      <h2>Craft and Gift</h2>
     `;
   }
 
