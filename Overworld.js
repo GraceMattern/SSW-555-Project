@@ -451,7 +451,7 @@ class Overworld {
     this.map = null;
     // storing playername inside this.playerName
     this.playerName =
-      config.playerName.length < 1 ? "DefaultName" : config.playerName;
+      config.playerName?.length < 1 ? "DefaultName" : config.playerName;
     //console.log(config.difficulty);
   }
 
