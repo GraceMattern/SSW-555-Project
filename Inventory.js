@@ -26,58 +26,6 @@ class Inventory {
     //Case 1: Show the first page of options
     if (pageKey === "root") {
       return [
-        // {
-        //   label: "Sage",
-        //   count: this.fetCounters("sage"),
-        //   description: "Sage",
-        //   handler: () => {
-        //     return `Sage : ${this.addToInventory("sage")}`;
-        //   },
-        // },
-        // {
-        //   label: "Apple",
-        //   count: this.fetCounters("apple"),
-        //   description: "Apple",
-        //   handler: () => {
-        //     return `Apple : ${this.addToInventory("apple")}`;
-        //   },
-        // },
-        // {
-        //   label: "Leek",
-        //   count: this.fetCounters("leeks"),
-        //   description: "Leek",
-        //   handler: () => {
-        //     return `Leek : ${this.addToInventory("leeks")}`;
-        //   },
-        // },
-        // //added by sv
-        // {
-        //   label: "Herb",
-        //   count: this.fetCounters("herb"),
-        //   description: "Herb",
-        //   handler: () => {
-        //     return `Herb : ${this.addToInventory("herb")}`;
-        //   },
-        // },
-
-        // //added by hs
-        // {
-        //   label: "Tomato",
-        //   count: this.fetCounters("tomato"),
-        //   description: "Tomato",
-        //   handler: () => {
-        //     return `Tomato : ${this.addToInventory("tomato")}`;
-        //   },
-        // },
-        // //added by sv - strawberry
-        // {
-        //   label: "Strawberry",
-        //   count: this.fetCounters("strawberry"),
-        //   description: "Strawberry",
-        //   handler: () => {
-        //     return `Strawberry : ${this.addToInventory("strawberry")}`;
-        //   },
-        // },
         // Craft Food
         {
           label: "Fruit Bowl",
@@ -159,7 +107,11 @@ class Inventory {
 
               return `Soup : ${updatedCount}`;
             }
-            alert(`Not sufficient Tomatoes ${this.fetCounters("soup")} and Leeks to craft food`);
+            alert(
+              `Not sufficient Tomatoes ${this.fetCounters(
+                "soup"
+              )} and Leeks to craft food`
+            );
             return `Soup : ${currentCount}`;
           },
         },
