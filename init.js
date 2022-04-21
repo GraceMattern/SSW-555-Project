@@ -33,7 +33,7 @@
     let difficultyLevel = document.getElementById("levels").value;
     const overworld = new Overworld({
       element: document.querySelector(".game-container"),
-      playerName: prompt("Enter the name of the player."),
+      playerName: prompt("Enter the name of the player.", "Player"),
       difficulty: difficultyLevel,
     });
     document.getElementById("levelContainer").style.display = "none";

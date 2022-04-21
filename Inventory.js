@@ -1,3 +1,4 @@
+// const utils = require("../utils.js");
 class Inventory {
   constructor({ onComplete }) {
     this.onComplete = onComplete;
@@ -20,10 +21,22 @@ class Inventory {
     localStorage.setItem("inventory", JSON.stringify(inventory));
     return true;
   }
+  // checkInventory() {
+  //   if localStorage.getItem("inventory") === null {
+  //     return false;
+  //   } else {
+  //     let inventory = localStorage.getItem("inventory");
+  //     if (inventory[fruitBowl] > 0 && inventory[jam] > 0 && inventory[herbalSachet] > 0) && inventory[soup] > 0 && inventory[pie] > 0) {
+  //       return true;
+  //     }
+  //     return false;
+  //   }
+  // }
 
   getOptions(pageKey) {
     //let inv = {"sage" : 0, "apple" : 0, "leeks" : 0};
     //Case 1: Show the first page of options
+    // const inventory = JSON.parse(localStorage.getItem("inventory"));
     if (pageKey === "root") {
       return [
         // Craft Food
@@ -41,6 +54,12 @@ class Inventory {
               document.getElementById("fruitBowlContainer").innerHTML =
                 updatedCount;
               utils.emitEvent("InventoryUpdated");
+              console.log(
+                "Fruit Bowl",
+                updatedCount,
+                JSON.stringify(localStorage.getItem("inventory"))
+              );
+              utils.checkInventory();
               return `Fruit Bowl : ${updatedCount}`;
             }
             alert(`Not sufficient Strawberry to craft item`);
@@ -60,7 +79,14 @@ class Inventory {
 
               const updatedCount = this.addToInventory("jam");
               document.getElementById("jamContainer").innerHTML = updatedCount;
+
               utils.emitEvent("InventoryUpdated");
+              console.log(
+                "Jam",
+                updatedCount,
+                JSON.stringify(localStorage.getItem("inventory"))
+              );
+              utils.checkInventory();
               return `Jam : ${updatedCount}`;
             }
             alert(`Not sufficient Strawberry to craft food`);
@@ -82,7 +108,7 @@ class Inventory {
               document.getElementById("herbalSachetContainer").innerHTML =
                 updatedCount;
               utils.emitEvent("InventoryUpdated");
-
+              utils.checkInventory();
               return `Herbal Sachet : ${updatedCount}`;
             }
             alert(`Not sufficient Herbs to craft food`);
@@ -104,7 +130,7 @@ class Inventory {
               const updatedCount = this.addToInventory("soup");
               document.getElementById("soupContainer").innerHTML = updatedCount;
               utils.emitEvent("InventoryUpdated");
-
+              utils.checkInventory();
               return `Soup : ${updatedCount}`;
             }
             alert(
@@ -128,6 +154,7 @@ class Inventory {
               const updatedCount = this.addToInventory("pie");
               document.getElementById("pieContainer").innerHTML = updatedCount;
               utils.emitEvent("InventoryUpdated");
+              utils.checkInventory();
               return `Pie : ${updatedCount}`;
             }
             alert(`Not sufficient Apples to craft food`);
@@ -190,7 +217,9 @@ class Hud {
       //check if the goal is met or in progress
       this.element.innerHTML = utils.inventoryHTML(inventory);
     } else if (difficultyLevel === "medium") {
+      this.element.innerHTML = utils.inventoryHTML(inventory);
     } else {
+      this.element.innerHTML = utils.inventoryHTML(inventory);
     }
   }
 
