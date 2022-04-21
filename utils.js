@@ -49,6 +49,48 @@ const utils = {
     });
   },
 
+  checkInventory() {
+    //console.log(inventory);
+    let inventory = JSON.parse(localStorage.getItem("inventory"));
+    if (inventory === null) {
+      return console.log("no inventory");
+    } else {
+      //let inventory = localStorage.getItem("inventory");
+      if (
+        inventory["fruitBowl"] > 0 &&
+        inventory["jam"] > 0 &&
+        inventory["herbalSachet"] > 0 &&
+        inventory["soup"] > 0 &&
+        inventory["pie"] > 0
+      ) {
+        // const canvas = document.getElementById("gc");
+        // const ctx = canvas.getContext("2d");
+        // const ts = new Image(60, 45);
+        // ts.src = "/assets/images/maps/Victory.png";
+        // ctx.drawImage(ts, 0, 0, canvas.width, canvas.height);
+
+        let img = document.createElement("img");
+        img.src = "/assets/images/maps/Victory.png";
+        img.style.position = "absolute";
+        img.style.zIndex = "3";
+        document.getElementsByClassName("game-container")[0].appendChild(img);
+        //this.wait(2000);
+        const menu = new PauseMenu({
+          onComplete: () => {
+            resolve();
+            this.map.isPaused = false;
+          },
+          // zIndex: 4,
+        });
+        // menu.style.zIndex = "4";
+        menu.init(document.querySelector(".game-container"));
+
+        return console.log("Everything crafted");
+      }
+      return console.log("Not everything crafted yet");
+    }
+  },
+
   inventoryHTML(inventory) {
     return `
     <div class="progressSoFar">
