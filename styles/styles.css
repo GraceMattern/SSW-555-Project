@@ -59,7 +59,7 @@ body {
   left: 2px;
   top: 10px;
   image-rendering: pixelated;
-  background: rgb(94, 126, 106);
+  background: antiquewhite;
   color: #000;
   border: 3px solid rgb(65, 114, 65);
   z-index: 2;

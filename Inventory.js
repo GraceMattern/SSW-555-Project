@@ -21,25 +21,10 @@ class Inventory {
     localStorage.setItem("inventory", JSON.stringify(inventory));
     return true;
   }
-  // checkInventory() {
-  //   if localStorage.getItem("inventory") === null {
-  //     return false;
-  //   } else {
-  //     let inventory = localStorage.getItem("inventory");
-  //     if (inventory[fruitBowl] > 0 && inventory[jam] > 0 && inventory[herbalSachet] > 0) && inventory[soup] > 0 && inventory[pie] > 0) {
-  //       return true;
-  //     }
-  //     return false;
-  //   }
-  // }
 
   getOptions(pageKey) {
-    //let inv = {"sage" : 0, "apple" : 0, "leeks" : 0};
-    //Case 1: Show the first page of options
-    // const inventory = JSON.parse(localStorage.getItem("inventory"));
     if (pageKey === "root") {
       return [
-        // Craft Food
         {
           label: "Fruit Bowl",
           type: "craftFood",
@@ -169,7 +154,7 @@ class Inventory {
     this.element = document.createElement("div");
     this.element.classList.add("Inventory");
     this.element.innerHTML = `
-      <h2>Craft and Gift</h2>
+      <h2>Cook and Gift</h2>
     `;
   }
 

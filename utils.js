@@ -63,26 +63,17 @@ const utils = {
         inventory["soup"] > 0 &&
         inventory["pie"] > 0
       ) {
-        // const canvas = document.getElementById("gc");
-        // const ctx = canvas.getContext("2d");
-        // const ts = new Image(60, 45);
-        // ts.src = "/assets/images/maps/Victory.png";
-        // ctx.drawImage(ts, 0, 0, canvas.width, canvas.height);
-
         let img = document.createElement("img");
         img.src = "/assets/images/maps/Victory.png";
         img.style.position = "absolute";
         img.style.zIndex = "3";
         document.getElementsByClassName("game-container")[0].appendChild(img);
-        //this.wait(2000);
         const menu = new PauseMenu({
           onComplete: () => {
             resolve();
             this.map.isPaused = false;
           },
-          // zIndex: 4,
         });
-        // menu.style.zIndex = "4";
         menu.init(document.querySelector(".game-container"));
 
         return console.log("Everything crafted");

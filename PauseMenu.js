@@ -12,7 +12,6 @@ class PauseMenu {
           description: "Replay",
           handler: () => {
             window.location.reload(true);
-            //We'll come back to this...
           },
         },
         {
