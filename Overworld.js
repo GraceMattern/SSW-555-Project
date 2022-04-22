@@ -18,24 +18,10 @@ class OverworldMap {
         : config.difficultyLevel === "medium"
         ? 2
         : 3;
-      //this.difficultyLevel = config.difficultyLevel;
     };
     console.log(typeof this.difficultyLevel);
     console.log(this.difficultyLevel);
   }
-
-  // difficultyNumber(difficultyLevel) {
-  //   switch (difficultyLevel) {
-  //     case "easy":
-  //       return 1;
-  //     case "medium":
-  //       return 2;
-  //     case "hard":
-  //       return 3;
-  //     default:
-  //       return 1;
-  //   }
-  // }
 
   drawLowerImage(ctx, cameraPerson) {
     ctx.drawImage(
@@ -60,7 +46,6 @@ class OverworldMap {
 
   mountObjects() {
     Object.keys(this.gameObjects).forEach((key) => {
-      //TODO: determine if this object should actually mount
       let object = this.gameObjects[key];
       object.id = key;
       object.mount(this);
@@ -130,24 +115,8 @@ class OverworldMap {
 
 window.OverworldMaps = {
   DemoRoom: {
-    // lowerSrc: "assets/images/maps/newmap.png",
-    //difficultyLevel: document.getElementById("levels").value,
     lowerSrc: "assets/images/maps/newmap.png",
-    // lowerSrc:
-    //   this.difficultyLevel === "easy"
-    //     ? "assets/images/maps/newmap.png"
-    //     : this.difficultyLevel === "medium"
-    //     ? "assets/images/maps/newmap.png"
-    //     : "assets/images/maps/newmap.png",
-
-    // upperSrc: "", // TODO
-    // difficultyNumber: function () {
-    //   return config.difficultyLevel === "easy"
-    //     ? 1
-    //     : config.difficultyLevel === "medium"
-    //     ? 2
-    //     : 3;
-    // },
+  
     gameObjects: {
       protag: new Person({
         isPlayerControlled: true,
@@ -422,22 +391,6 @@ window.OverworldMaps = {
       [utils.asGridCoord(37, 30)]: true,
       [utils.asGridCoord(38, 30)]: true,
     },
-
-    cutsceneSpaces: {
-      // [utils.asGridCoord(7, 8)]: [
-      //   {
-      //     events: [
-      //       {
-      //         who: "npc1",
-      //         type: "stand",
-      //         direction: "left",
-      //         time: 500,
-      //       },
-      //       { type: "textMessage", text: "Pick Herbs, Veggies and Fruits" },
-      //     ],
-      //   },
-      // ],
-    },
   },
 };
 
@@ -487,9 +440,6 @@ class Overworld {
           object.sprite.draw(this.ctx, cameraPerson);
         });
 
-      // TODO upper
-      // this.map.drawUpperImage(this.ctx, cameraPerson);
-
       requestAnimationFrame(() => {
         step();
       });
@@ -504,13 +454,6 @@ class Overworld {
       this.map.checkForPick();
     });
 
-    // new KeyPressListener("Tab", () => {
-    //   //Is there a person here to talk to?
-    //   if (!this.map.isCutscenePlaying) {
-    //     this.map.startCutscene([{ type: "inventory" }]);
-    //   }
-    // });
-
     new KeyPressListener("CapsLock", () => {
       //Is there a person here to talk to?
       if (!this.map.isCutscenePlaying) {
@@ -522,11 +465,6 @@ class Overworld {
       if (!this.map.isCutscenePlaying) {
         this.map.startCutscene([{ type: "pause" }]);
       }
-    });
-
-    new KeyPressListener("p", () => {
-      //Check one space away from current location for picking up object.
-      //Add object counter to inventory
     });
   }
 
@@ -555,9 +493,6 @@ class Overworld {
 
     this.startGameLoop();
     this.map.startCutscene([
-      // { who: "protag", type: "walk", direction: "down" },
-      // { who: "protag", type: "walk", direction: "down" },
-      // { who: "npc1", type: "walk", direction: "down", time: 800 },
       {
         type: "textMessage",
         text: "Welcome to The Giving Garden! Your mission is to collect items, craft goods, and gift those goods. Press next.",
