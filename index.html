@@ -1,50 +1,53 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>The Giving Garden</title>
-    <link href="/styles/styles.css" type="text/css" rel="stylesheet" />
-    <link href="/styles/TextMessage.css" type="text/css" rel="stylesheet" />
-    <link href="/styles/KeyboardMenu.css" type="text/css" rel="stylesheet" />
-    <link href="/styles/Menus.css" type="text/css" rel="stylesheet" />
-  </head>
-  <body id="body">
-    <!-- Difficulty level selector
+
+<head>
+  <title>The Giving Garden</title>
+  <link href="/styles/styles.css" type="text/css" rel="stylesheet" />
+  <link href="/styles/TextMessage.css" type="text/css" rel="stylesheet" />
+  <link href="/styles/KeyboardMenu.css" type="text/css" rel="stylesheet" />
+  <link href="/styles/Menus.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body id="body">
+  <!-- Difficulty level selector
     levelContainer will only appear on the start screen
     -->
 
-    <div class="game-container">
-      <canvas id="gc" class="game-canvas" width="352px" height="198px"></canvas>
-      <div class="levelContainer" id="levelContainer">
-        <!-- <label for="levels">Difficulty</label> -->
-        <select name="levels" id="levels">
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
-      </div>
-      <button id="btn" class="start-btn"></button>
+  <div class="game-container">
+    <canvas id="gc" class="game-canvas" width="352px" height="198px"></canvas>
+    <div class="levelContainer" id="levelContainer">
+      <!-- <label for="levels">Difficulty</label> -->
+      <select name="levels" id="levels">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
     </div>
-    <!-- Enable Autoplay on browser -->
-    <audio loop autoplay controls>
-      <source src="./assets/music/relax1.mp3" type="audio/mpeg" />
-    </audio>
+    <button id="btn" class="start-btn"></button>
+  </div>
+  <!-- Enable Autoplay on browser -->
+  <audio loop autoplay controls>
+    <source src="./assets/music/relax1.mp3" type="audio/mpeg" />
+  </audio>
 
-    <!-- Scripts -->
-    <script src="/utils.js"></script>
-    <script src="/DirectionInput.js"></script>
-    <script src="/GameObject.js"></script>
-    <script src="/Sprite.js"></script>
-    <script src="/Overworld.js"></script>
-    <script src="/OverworldEvent.js"></script>
-    <script src="/KeyPressListener.js"></script>
-    <script src="/KeyboardMenu.js"></script>
-    <script src="/PauseMenu.js"></script>
-    <script src="/Inventory.js"></script>
-    <script src="/TextMessage.js"></script>
-    <script src="/RevealingText.js"></script>
-    <script src="/Decoration.js"></script>
-    <script src="/Actions.js"></script>
+  <!-- Scripts -->
+  <script src="/utils.js"></script>
+  <script src="/DirectionInput.js"></script>
+  <script src="/GameObject.js"></script>
+  <script src="/Sprite.js"></script>
+  <script src="/Overworld.js"></script>
+  <script src="/OverworldEvent.js"></script>
+  <script src="/KeyPressListener.js"></script>
+  <script src="/KeyboardMenu.js"></script>
+  <script src="/PauseMenu.js"></script>
+  <script src="/Inventory.js"></script>
+  <script src="/TextMessage.js"></script>
+  <script src="/RevealingText.js"></script>
+  <script src="/Decoration.js"></script>
+  <script src="/Actions.js"></script>
 
-    <script src="/init.js"></script>
-  </body>
+  <script src="/init.js"></script>
+</body>
+
 </html>

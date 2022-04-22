@@ -116,7 +116,7 @@ class OverworldMap {
 window.OverworldMaps = {
   DemoRoom: {
     lowerSrc: "assets/images/maps/newmap.png",
-  
+
     gameObjects: {
       protag: new Person({
         isPlayerControlled: true,

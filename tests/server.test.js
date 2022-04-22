@@ -1,19 +1,19 @@
-var http = require('http');
+var http = require("http");
 
-describe('Server', () => {
+describe("Server", () => {
   let server;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     server = http.createServer((req, res) => {
-      res.write('ok');
+      res.write("ok");
       res.end();
     });
     server.listen(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     server.close(done);
   });
 
-  test('my test', async () => {});
+  test("my test", async () => {});
 });
