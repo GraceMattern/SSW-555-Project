@@ -255,7 +255,7 @@ window.OverworldMaps = {
             events: [
               {
                 type: "textMessage",
-                text: "Hey! In order to craft the gifts we are making, you need to first collect each item. Press Caps Locks to view your inventory.",
+                text: "Hey! In order to craft the gifts we are making, you need to first collect each item.",
                 faceHero: "npc2",
               },
               {
@@ -268,15 +268,23 @@ window.OverworldMaps = {
               },
               {
                 type: "textMessage",
-                text: "To craft each gift you need to have the required items in inventory and then press the gift in the inventory that you want to make.",
-              },
-              {
-                type: "textMessage",
-                text: "Come back to me if you forget the recipe.",
+                text: `To craft gift you need to have the required items in inventory and then press the gift in the inventory that you want to make.`,
               },
               {
                 type: "textMessage",
                 text: "Your current progress is shown to the left menu on the screen.",
+              },
+              {
+                type: "textMessage",
+                text: "CAPSLOCK: Cook Menu,  ESC: For PAUSE MENU, Top Left corner is for inventory",
+              },
+              {
+                type: "textMessage",
+                text: "For Easy difficulty cook 1 of each item, Medium 2 of each, Hard 3 of Each",
+              },
+              {
+                type: "textMessage",
+                text: "Come back to me if you forget anything.",
               },
             ],
           },

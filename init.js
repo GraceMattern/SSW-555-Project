@@ -26,11 +26,14 @@
     soup: 0,
     pie: 0,
   };
+  localStorage.removeItem("difficulty");
   localStorage.setItem("inventory", JSON.stringify(inventory));
 
   btn.addEventListener("click", () => {
     btn.hidden = true;
     let difficultyLevel = document.getElementById("levels").value;
+    localStorage.setItem("difficulty", difficultyLevel);
+    console.log("difficulty level: " + difficultyLevel);
     const overworld = new Overworld({
       element: document.querySelector(".game-container"),
       playerName: prompt("Enter the name of the player.", "Player"),
