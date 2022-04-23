@@ -107,7 +107,7 @@ const utils = {
         // quitButton.style.position = "absolute";
 
         quitButton.addEventListener("click", function () {
-          window.close();
+          self.close();
         });
         document.getElementById("restartDiv").appendChild(quitButton);
 
