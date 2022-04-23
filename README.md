@@ -5,7 +5,7 @@ Team SCRUMptious
 - Prathyeka Anugu
 - Dhruveel Doshi
 - Grace Mattern
-- Keyur Sanjaliya
+- Keyur Senjaliya
 - Harsh Singhania
 - Shreyas Vispute
 - David Yang
