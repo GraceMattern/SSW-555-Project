@@ -24,6 +24,13 @@ class Inventory {
 
   getOptions(pageKey) {
     if (pageKey === "root") {
+      let difficultyLevel = localStorage.getItem("difficulty");
+      let count = 1;
+      if (difficultyLevel === "medium") {
+        count = 2;
+      } else if (difficultyLevel === "hard") {
+        count = 3;
+      }
       return [
         {
           label: "Fruit Bowl",
@@ -44,7 +51,7 @@ class Inventory {
                 updatedCount,
                 JSON.stringify(localStorage.getItem("inventory"))
               );
-              utils.checkInventory();
+              utils.checkInventory(count);
               return `Fruit Bowl : ${updatedCount}`;
             }
             alert(`Not sufficient Strawberry to craft item`);
@@ -71,7 +78,7 @@ class Inventory {
                 updatedCount,
                 JSON.stringify(localStorage.getItem("inventory"))
               );
-              utils.checkInventory();
+              utils.checkInventory(count);
               return `Jam : ${updatedCount}`;
             }
             alert(`Not sufficient Strawberry to craft food`);
@@ -93,7 +100,7 @@ class Inventory {
               document.getElementById("herbalSachetContainer").innerHTML =
                 updatedCount;
               utils.emitEvent("InventoryUpdated");
-              utils.checkInventory();
+              utils.checkInventory(count);
               return `Herbal Sachet : ${updatedCount}`;
             }
             alert(`Not sufficient Herbs to craft food`);
@@ -115,7 +122,7 @@ class Inventory {
               const updatedCount = this.addToInventory("soup");
               document.getElementById("soupContainer").innerHTML = updatedCount;
               utils.emitEvent("InventoryUpdated");
-              utils.checkInventory();
+              utils.checkInventory(count);
               return `Soup : ${updatedCount}`;
             }
             alert(
@@ -139,7 +146,7 @@ class Inventory {
               const updatedCount = this.addToInventory("pie");
               document.getElementById("pieContainer").innerHTML = updatedCount;
               utils.emitEvent("InventoryUpdated");
-              utils.checkInventory();
+              utils.checkInventory(count);
               return `Pie : ${updatedCount}`;
             }
             alert(`Not sufficient Apples to craft food`);
@@ -196,7 +203,7 @@ class Hud {
   update() {
     console.log("updateFired");
     const inventory = JSON.parse(localStorage.getItem("inventory"));
-    const difficultyLevel = document.getElementById("levels").value;
+    const difficultyLevel = localStorage.getItem("difficulty");
 
     if (difficultyLevel === "easy") {
       //check if the goal is met or in progress

@@ -49,32 +49,67 @@ const utils = {
     });
   },
 
-  checkInventory() {
+  checkInventory(count) {
     //console.log(inventory);
+    console.log("Count", count);
     let inventory = JSON.parse(localStorage.getItem("inventory"));
+
     if (inventory === null) {
       return console.log("no inventory");
     } else {
       //let inventory = localStorage.getItem("inventory");
       if (
-        inventory["fruitBowl"] > 0 &&
-        inventory["jam"] > 0 &&
-        inventory["herbalSachet"] > 0 &&
-        inventory["soup"] > 0 &&
-        inventory["pie"] > 0
+        inventory["fruitBowl"] >= count &&
+        inventory["jam"] >= count &&
+        inventory["herbalSachet"] >= count &&
+        inventory["soup"] >= count &&
+        inventory["pie"] >= count
       ) {
+        console.log("utils", inventory);
+        // const canvas = document.getElementById("gc");
+        // const ctx = canvas.getContext("2d");
+        // const ts = new Image(60, 45);
+        // ts.src = "/assets/images/maps/Victory.png";
+        // ctx.drawImage(ts, 0, 0, canvas.width, canvas.height);
+
         let img = document.createElement("img");
         img.src = "/assets/images/maps/Victory.png";
         img.style.position = "absolute";
         img.style.zIndex = "3";
         document.getElementsByClassName("game-container")[0].appendChild(img);
-        const menu = new PauseMenu({
-          onComplete: () => {
-            resolve();
-            this.map.isPaused = false;
-          },
+
+        const restartDiv = document.createElement("div");
+        restartDiv.id = "restartDiv";
+        restartDiv.style.zIndex = "4";
+        restartDiv.style.position = "absolute";
+
+        document
+          .getElementsByClassName("game-container")[0]
+          .appendChild(restartDiv);
+
+        const restartButton = document.createElement("button");
+        restartButton.id = "restartBtn";
+        restartButton.innerHTML = "RESTART";
+        // restartButton.style.zIndex = "4";
+        restartButton.style.marginRight = "1rem";
+
+        // restartButton.style.position = "absolute";
+
+        restartButton.addEventListener("click", function () {
+          window.location.reload(true);
         });
-        menu.init(document.querySelector(".game-container"));
+        document.getElementById("restartDiv").appendChild(restartButton);
+
+        const quitButton = document.createElement("button");
+        quitButton.id = "quitBtn";
+        quitButton.innerHTML = "QUIT";
+        // quitButton.style.zIndex = "4";
+        // quitButton.style.position = "absolute";
+
+        quitButton.addEventListener("click", function () {
+          window.close();
+        });
+        document.getElementById("restartDiv").appendChild(quitButton);
 
         return console.log("Everything crafted");
       }
